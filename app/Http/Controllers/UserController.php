@@ -35,7 +35,7 @@ class UserController extends Controller
             return response(['message' => 'Invalid email or password1'], 401);
         }
 
-        if(auth()->attempt(['email' => $request->email, 'password' => bcrypt($request->password)])) {
+        if(auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
         }
 

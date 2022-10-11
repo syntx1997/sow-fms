@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class StaffDashboardController extends Controller
 {
     public function index() {
-        return 'staff';
+        return view('pages.staff.index', [
+            'title' => 'Staff Dashboard',
+            'js' => asset('js/pages/staff/index.js')
+        ]);
     }
 }

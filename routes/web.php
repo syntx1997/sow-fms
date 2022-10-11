@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\StaffDashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,4 +28,20 @@ Route::get('/login', [AuthController::class, 'login'])
 Route::prefix('/auth')->group(function (){
     Route::post('/login', [UserController::class, 'login']);
 });
+
+/* Dashboards */
+Route::middleware('auth')->prefix('/dashboard')->group(function () {
+
+    // Admin
+    Route::middleware('admin.only')->prefix('/admin')->group(function () {
+        Route::get('/index', [AdminDashboardController::class, 'index']);
+    });
+
+    // Staff
+    Route::middleware('staff.only')->prefix('/staff')->group(function () {
+        Route::get('/index', [StaffDashboardController::class, 'index']);
+    });
+
+});
+
 

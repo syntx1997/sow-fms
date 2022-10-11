@@ -10,7 +10,10 @@ $(function (){
             data: $(this).serialize(),
             dataType: 'JSON',
             success: function (res) {
-
+                $(alertMessage(res.message, 'success')).insertBefore(loginForm);
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
             },
             error: function (err) {
                 const errJSON = err.responseJSON;

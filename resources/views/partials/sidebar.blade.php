@@ -5,7 +5,7 @@
                 <img src="images/Untitled-1.jpg" alt="">
                 <a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
             </div>
-            <h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
+            <h5 class="name"><span class="font-w400">Hello,</span> {{ auth()->user()->name }}</h5>
             <p class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95f8f4e7e4e0f0efefefefd5f8f4fcf9bbf6faf8">[email&#160;protected]</a></p>
         </div>
         <ul class="metismenu" id="menu">

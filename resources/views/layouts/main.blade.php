@@ -52,6 +52,17 @@
         ***********************************-->
 
         <!--**********************************
+            Chat box start
+        ***********************************-->
+        <div class="chatbox">
+            <div class="chatbox-close"></div>
+            <iframe src="/chatify" title="description" style="width: 100%; height: 95%; border: 0px solid #c0c0c0"></iframe>
+        </div>
+        <!--**********************************
+            Chat box End
+        ***********************************-->
+
+        <!--**********************************
             Header start
         ***********************************-->
         @include('partials.header')
@@ -71,7 +82,7 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            @section('content')
+            @yield('content')
         </div>
         <!--**********************************
             Content body end
@@ -107,6 +118,9 @@
 
 	<!-- Dashboard 1 -->
 	<script src="{{ asset('js/dashboard/dashboard-1.js') }}"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
