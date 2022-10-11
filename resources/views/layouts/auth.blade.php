@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>{{ $title ?? '' }}</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/pig.png') }}">
     <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -34,7 +34,6 @@
 <script src="{{ asset('js/custom.min.js') }}"></script>
 <script src="{{ asset('js/deznav-init.js') }}"></script>
 <script src="{{ asset('js/demo.js') }}"></script>
-<script src="{{ asset('js/styleSwitcher.js') }}"></script>
 <script src="{{ asset('js/global.js') }}"></script>
 <script src="{{ $js ?? '' }}"></script>
 </body>

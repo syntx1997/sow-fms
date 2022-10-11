@@ -16,7 +16,7 @@
 	<meta name="format-detection" content="telephone=no">
     <title>{{ $title ?? '' }}</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/pig.png') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}">
     <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet') }}">
 	<link href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
@@ -105,7 +105,6 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
 	<script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
 	<script src="{{ asset('vendor/chart.js/Chart.bundle.min.js') }}"></script>
@@ -126,7 +125,6 @@
     <script src="{{ asset('js/custom.min.js') }}"></script>
 	<script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('js/demo.js') }}"></script>
-    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
 
     <script src="{{ asset('js/global.js') }}"></script>
     <script src="{{ $js ?? '' }}"></script>
