@@ -22,7 +22,7 @@ $(document).on('click', '#logout-btn', function (){
         console.log(result);
         if (result.value) {
             $.ajax({
-                url: '/func/auth/logout',
+                url: '/auth/logout',
                 type: 'GET',
                 success: function (response){
                     Swal.fire({

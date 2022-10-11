@@ -41,4 +41,14 @@ class UserController extends Controller
 
         return response(['message' => 'Logged In!'], 201);
     }
+
+    public function logout(Request $request) {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response([
+            'message' => 'You have been logged out!'
+        ], 201);
+    }
 }

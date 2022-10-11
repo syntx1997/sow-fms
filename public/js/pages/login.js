@@ -5,7 +5,7 @@ $(function (){
     loginForm.on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            url: '/auth/login',
+            url: '/func/auth/login',
             type: 'POST',
             data: $(this).serialize(),
             dataType: 'JSON',

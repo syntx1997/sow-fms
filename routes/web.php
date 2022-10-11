@@ -25,8 +25,13 @@ Route::get('/login', [AuthController::class, 'login'])
     ->name('login')
     ->middleware('guest');
 
-Route::prefix('/auth')->group(function (){
-    Route::post('/login', [UserController::class, 'login']);
+Route::prefix('/func')->group(function () {
+
+    Route::prefix('/auth')->group(function (){
+        Route::post('/login', [UserController::class, 'login']);
+        Route::get('/logout', [UserController::class, 'logout']);
+    });
+
 });
 
 /* Dashboards */
