@@ -126,6 +126,8 @@
 	<script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('js/demo.js') }}"></script>
 
+    @stack('js')
+
     <script src="{{ asset('js/global.js') }}"></script>
     <script src="{{ $js ?? '' }}"></script>
 </body>

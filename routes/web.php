@@ -25,24 +25,32 @@ Route::get('/login', [AuthController::class, 'login'])
     ->name('login')
     ->middleware('guest');
 
+/* -- ---------- Web APIs [Func/Functions] ----------- -- */
 Route::prefix('/func')->group(function () {
 
+    /* -- ---------- Authentication ----------- -- */
     Route::prefix('/auth')->group(function (){
         Route::post('/login', [UserController::class, 'login']);
         Route::get('/logout', [UserController::class, 'logout']);
     });
 
-});
-
-/* Dashboards */
-Route::middleware('auth')->prefix('/dashboard')->group(function () {
-
-    // Admin
-    Route::middleware('admin.only')->prefix('/admin')->group(function () {
-        Route::get('/index', [AdminDashboardController::class, 'index']);
+    /* -- ---------- Users ----------- -- */
+    Route::prefix('/user')->group(function () {
+        Route::get('/get/staff/all', [UserController::class, 'getAllStaff']);
     });
 
-    // Staff
+});
+
+/* -- ---------- Dashboards ----------- -- */
+Route::middleware('auth')->prefix('/dashboard')->group(function () {
+
+    /* -- ---------- Admin ----------- -- */
+    Route::middleware('admin.only')->prefix('/admin')->group(function () {
+        Route::get('/index', [AdminDashboardController::class, 'index']);
+        Route::get('/user-management', [AdminDashboardController::class, 'userManagement']);
+    });
+
+    /* -- ---------- Staff ----------- -- */
     Route::middleware('staff.only')->prefix('/staff')->group(function () {
         Route::get('/index', [StaffDashboardController::class, 'index']);
     });

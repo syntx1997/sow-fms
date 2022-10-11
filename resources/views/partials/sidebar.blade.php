@@ -12,7 +12,7 @@
             <!-- Admin [Start] -->
             @if(auth()->user()->role == 'Administrator')
                 <li class="nav-label first">Main Menu</li>
-                <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+                <li><a href="{{ url('/dashboard/admin/user-management') }}" class="ai-icon" aria-expanded="false">
                         <i class="flaticon-028-user-1"></i>
                         <span class="nav-text">User Management</span>
                     </a>

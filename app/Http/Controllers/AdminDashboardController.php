@@ -12,4 +12,11 @@ class AdminDashboardController extends Controller
             'js' => asset('js/pages/dashboard/admin/index.js')
         ]);
     }
+
+    public function userManagement() {
+        return view('pages.admin.user-management', [
+            'title' => 'User Management',
+            'js' => asset('js/pages/dashboard/admin/user-management.js')
+        ]);
+    }
 }
