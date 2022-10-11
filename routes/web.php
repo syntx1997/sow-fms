@@ -37,6 +37,8 @@ Route::prefix('/func')->group(function () {
     /* -- ---------- Users ----------- -- */
     Route::prefix('/user')->group(function () {
         Route::get('/get/staff/all', [UserController::class, 'getAllStaff']);
+        Route::post('add/staff', [UserController::class, 'addStaff']);
+        Route::post('delete/staff', [UserController::class, 'deleteStaff']);
     });
 
 });

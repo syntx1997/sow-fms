@@ -14,6 +14,7 @@
 	<meta property="og:description" content="Sow Feeding Management System">
 	<meta property="og:image" content="https://minsu.edu.ph/template/images/logo.png">
 	<meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>{{ $title ?? '' }}</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/pig.png') }}">

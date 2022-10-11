@@ -59,8 +59,9 @@ class UserController extends Controller
         $data = [];
 
         $staffs = User::where('role', 'Staff')->get();
-        foreach ($staffs as $staff) {
+        foreach ($staffs as $index => $staff) {
             $data[] = array_merge($staff->toArray(), [
+                'number' => '<h6>'.($index + 1).'.</h6>',
                 'staff' => $this->user($staff->avatar, $staff->name, $staff->email),
                 'action' => $this->action('staff', $staff),
                 'date' => Carbon::parse($staff->created_at)->format('m/d/Y')
@@ -68,6 +69,38 @@ class UserController extends Controller
         }
 
         return response(['data' => $data], 201);
+    }
+
+    public function addStaff(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return response(['errors' => $validator->errors()], 401);
+        }
+
+        User::create($request->all());
+
+        return response(['message' => 'New staff added successfully!'], 201);
+    }
+
+    public function deleteStaff(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return response(['errors' => $validator->errors()], 401);
+        }
+
+        $staff = User::find($request->id);
+        $staff->delete();
+
+        return response(['message' => 'Staff deleted successfully!'], 201);
     }
 
     /*-- ----------- Private Functions -----------  --*/

@@ -1,11 +1,15 @@
 const staffTable = $('#staffTable');
 
+const addStaffForm = $('#addStaffForm');
+const addStaffSubmitBtn = addStaffForm.find('button[type="submit"]');
+const addStaffModal = $('#addStaffModal');
+
 $(function (){
     const staffDataTable = staffTable.DataTable({
         'ajax': '/func/user/get/staff/all',
         'columns': [
             {
-                'data': 'id'
+                'data': 'number'
             },
             {
                 'data': 'staff'
@@ -21,7 +25,6 @@ $(function (){
         searching: false,
         paging:true,
         select: false,
-        //info: false,
         lengthChange:false ,
         language: {
             paginate: {
@@ -30,4 +33,81 @@ $(function (){
             }
         }
     });
+
+    addStaffForm.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/user/add/staff',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'JSON',
+            success: function (res) {
+                resetForm(addStaffForm);
+                reloadDataTable(staffTable);
+                hideModal(addStaffModal);
+            },
+            error: function (err) {
+                const errJSON = err.responseJSON;
+                if (errJSON.errors) {
+                    const errors = errJSON.errors;
+                    $.each(errors, function (field, errMessage) {
+                        const Validation = new CustomValidation();
+                        const input = formInput(addStaffForm, 'input', field);
+
+                        Validation.validate(input, errMessage);
+                    });
+                }
+
+                if (errJSON.message) {
+                    addStaffForm.find('.modal-body')
+                        .prepend(alertMessage(errJSON.message, 'danger'));
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(addStaffSubmitBtn, 'Adding');
+            },
+            complete: function () {
+                submitBtnAfterSend(addStaffSubmitBtn, 'Add');
+            }
+        });
+    });
+});
+
+$(document).on('click', '#staffEditBtn', function () {
+    const data = $(this).data();
+    console.log(data);
+});
+
+$(document).on('click', '#staffDeleteBtn', function () {
+    const data = $(this).data();
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/func/user/delete/staff',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: 'POST',
+                data: {
+                    id: data.data.id
+                },
+                dataType: 'JSON',
+                success: function (res) {
+                    Swal.fire(
+                        'Deleted!',
+                        res.message,
+                        'success'
+                    )
+                    reloadDataTable(staffTable);
+                }
+            });
+        }
+    })
 });
