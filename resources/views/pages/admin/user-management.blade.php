@@ -66,6 +66,41 @@
             </form>
         </div>
     </div>
+
+    <div id="editStaffModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="editStaffForm" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fa fa-edit"></i> Edit Staff
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-3">Name</label>
+                        <div class="col-9">
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-3">Email</label>
+                        <div class="col-9">
+                            <input type="email" name="email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id">
+                    <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 @push('js')
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>

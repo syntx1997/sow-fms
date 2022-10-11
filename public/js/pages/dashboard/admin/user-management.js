@@ -4,6 +4,10 @@ const addStaffForm = $('#addStaffForm');
 const addStaffSubmitBtn = addStaffForm.find('button[type="submit"]');
 const addStaffModal = $('#addStaffModal');
 
+const editStaffForm = $('#editStaffForm');
+const editStaffSubmitBtn = editStaffForm.find('button[type="submit"]');
+const editStaffModal = $('#editStaffModal');
+
 $(function (){
     const staffDataTable = staffTable.DataTable({
         'ajax': '/func/user/get/staff/all',
@@ -71,11 +75,54 @@ $(function (){
             }
         });
     });
+
+    editStaffForm.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/user/update/staff',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'JSON',
+            success: function (res) {
+                resetForm(editStaffForm);
+                reloadDataTable(staffTable);
+                hideModal(editStaffModal);
+            },
+            error: function (err) {
+                const errJSON = err.responseJSON;
+                if (errJSON.errors) {
+                    const errors = errJSON.errors;
+                    $.each(errors, function (field, errMessage) {
+                        const Validation = new CustomValidation();
+                        const input = formInput(editStaffForm, 'input', field);
+
+                        Validation.validate(input, errMessage);
+                    });
+                }
+
+                if (errJSON.message) {
+                    editStaffForm.find('.modal-body')
+                        .prepend(alertMessage(errJSON.message, 'danger'));
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(editStaffSubmitBtn, 'Editing');
+            },
+            complete: function () {
+                submitBtnAfterSend(editStaffSubmitBtn, 'Edit');
+            }
+        });
+    });
 });
 
 $(document).on('click', '#staffEditBtn', function () {
     const data = $(this).data();
-    console.log(data);
+
+    showModal(editStaffModal);
+
+    editStaffForm.find('input[name="name"]').val(data.data.name);
+    editStaffForm.find('input[name="email"]').val(data.data.email);
+    editStaffForm.find('input[name="id"]').val(data.data.id);
 });
 
 $(document).on('click', '#staffDeleteBtn', function () {

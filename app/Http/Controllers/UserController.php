@@ -103,6 +103,23 @@ class UserController extends Controller
         return response(['message' => 'Staff deleted successfully!'], 201);
     }
 
+    public function updateStaff(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return response(['errors' => $validator->errors()], 401);
+        }
+
+        $staff = User::find($request->id);
+        $staff->update($request->all());
+
+        return response(['message' => 'Staff updated successfully!'], 201);
+    }
+
     /*-- ----------- Private Functions -----------  --*/
     private function user($img, $name, $email) {
         $imgPath = asset('storage/users-avatar/' . $img);
