@@ -6,17 +6,7 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\StaffDashboardController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\SowController;
 
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
@@ -29,7 +19,7 @@ Route::get('/login', [AuthController::class, 'login'])
 Route::prefix('/func')->group(function () {
 
     /* -- ---------- Authentication ----------- -- */
-    Route::prefix('/auth')->group(function (){
+    Route::prefix('/auth')->group(function () {
         Route::post('/login', [UserController::class, 'login']);
         Route::get('/logout', [UserController::class, 'logout']);
     });
@@ -40,6 +30,14 @@ Route::prefix('/func')->group(function () {
         Route::post('add/staff', [UserController::class, 'addStaff']);
         Route::post('delete/staff', [UserController::class, 'deleteStaff']);
         Route::post('update/staff', [UserController::class, 'updateStaff']);
+    });
+
+    /* -- ---------- Sow ----------- -- */
+    Route::prefix('/sow')->group(function () {
+        Route::post('/add', [SowController::class, 'add']);
+        Route::get('/get-all', [SowController::class, 'getAll']);
+        Route::post('/delete', [SowController::class, 'delete']);
+        Route::post('/edit', [SowController::class, 'edit']);
     });
 
 });
