@@ -19,4 +19,11 @@ class AdminDashboardController extends Controller
             'js' => asset('js/pages/dashboard/admin/user-management.js')
         ]);
     }
+
+    public function sowManagement() {
+        return view('pages.admin.sow-management', [
+            'title' => 'Sow Management',
+            'js' => asset('js/pages/dashboard/admin/sow-management.js')
+        ]);
+    }
 }

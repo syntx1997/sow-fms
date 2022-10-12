@@ -83,7 +83,12 @@ class UserController extends Controller
             return response(['errors' => $validator->errors()], 401);
         }
 
-        User::create($request->all());
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role
+        ]);
 
         return response(['message' => 'New staff added successfully!'], 201);
     }

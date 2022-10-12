@@ -51,6 +51,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::middleware('admin.only')->prefix('/admin')->group(function () {
         Route::get('/index', [AdminDashboardController::class, 'index']);
         Route::get('/user-management', [AdminDashboardController::class, 'userManagement']);
+        Route::get('/sow-management', [AdminDashboardController::class, 'sowManagement']);
     });
 
     /* -- ---------- Staff ----------- -- */

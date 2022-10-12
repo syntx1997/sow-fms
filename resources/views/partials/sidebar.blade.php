@@ -11,7 +11,17 @@
 
             <!-- Admin [Start] -->
             @if(auth()->user()->role == 'Administrator')
+                <li><a href="{{ url('/dashboard/admin/index') }}" class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-096-dashboard"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
                 <li class="nav-label first">Main Menu</li>
+                <li><a href="{{ url('/dashboard/admin/sow-management') }}" class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-089-piggy-bank"></i>
+                        <span class="nav-text">Sow Management</span>
+                    </a>
+                </li>
                 <li><a href="{{ url('/dashboard/admin/user-management') }}" class="ai-icon" aria-expanded="false">
                         <i class="flaticon-028-user-1"></i>
                         <span class="nav-text">User Management</span>
@@ -22,6 +32,11 @@
 
             <!-- Staff [Start] -->
             @if(auth()->user()->role == 'Staff')
+                <li><a href="{{ url('/dashboard/staff/index') }}" class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-096-dashboard"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
             @endif
             <!-- Staff [End] -->
 
