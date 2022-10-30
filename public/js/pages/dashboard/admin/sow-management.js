@@ -13,6 +13,9 @@ $(function () {
         'ajax': '/func/sow/get-all',
         'columns': [
             {
+                'data': 'viewActivity',
+            },
+            {
                 'data': 'sow_no',
             },
             {

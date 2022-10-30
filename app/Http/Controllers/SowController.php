@@ -69,6 +69,7 @@ class SowController extends Controller
         $sows = Sow::all();
         foreach ($sows as $sow) {
             $data[] = array_merge($sow->toArray(), [
+                'viewActivity' => viewActivitiesBtn('sow', $sow),
                 'actions' => editDeleteBtn('sow', $sow)
             ]);
         }

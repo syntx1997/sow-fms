@@ -15,6 +15,7 @@
                     <table class="table style-1" id="sowTable">
                         <thead>
                         <tr>
+                            <th></th>
                             <th>SOW No.</th>
                             <th>BREED</th>
                             <th>DATE BORN</th>
