@@ -16,6 +16,7 @@
                         <tr>
                             <th>#</th>
                             <th>STAFF</th>
+                            <th>PHONE #</th>
                             <th>DATE ADDED</th>
                             <th>ACTION</th>
                         </tr>
@@ -49,6 +50,12 @@
                         <label class="col-3">Email</label>
                         <div class="col-9">
                             <input type="email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-3">Phone</label>
+                        <div class="col-9">
+                            <input type="text" name="phone" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -90,6 +97,12 @@
                         <label class="col-3">Email</label>
                         <div class="col-9">
                             <input type="email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-3">Phone</label>
+                        <div class="col-9">
+                            <input type="text" name="phone" class="form-control">
                         </div>
                     </div>
                 </div>

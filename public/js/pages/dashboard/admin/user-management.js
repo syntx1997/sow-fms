@@ -19,6 +19,9 @@ $(function (){
                 'data': 'staff'
             },
             {
+                'data': 'phone'
+            },
+            {
                 'className': 'text-primary',
                 'data': 'date'
             },
@@ -122,6 +125,7 @@ $(document).on('click', '#staffEditBtn', function () {
 
     editStaffForm.find('input[name="name"]').val(data.data.name);
     editStaffForm.find('input[name="email"]').val(data.data.email);
+    editStaffForm.find('input[name="phone"]').val(data.data.phone);
     editStaffForm.find('input[name="id"]').val(data.data.id);
 });
 
