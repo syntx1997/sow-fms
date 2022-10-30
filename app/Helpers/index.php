@@ -22,7 +22,7 @@ if(!function_exists('viewActivitiesBtn')) {
     function viewActivitiesBtn($btnName, $data):string {
         return <<<HERE
             <div class="d-flex action-button">
-                <a href="/" id="{$btnName}ViewActivityBtn" class="btn btn-link btn-xs light px-2" title="View Activity Schedules">
+                <a href="/dashboard/admin/view-activity/{$data['id']}" id="{$btnName}ViewActivityBtn" class="btn btn-link btn-xs light px-2" title="View Activity Schedules">
                     <i class="flaticon-057-eye"></i>
                 </a>
             </div>

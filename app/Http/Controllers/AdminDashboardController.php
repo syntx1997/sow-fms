@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Sow;
 
 class AdminDashboardController extends Controller
 {
@@ -24,6 +24,16 @@ class AdminDashboardController extends Controller
         return view('pages.admin.sow-management', [
             'title' => 'Sow Management',
             'js' => asset('js/pages/dashboard/admin/sow-management.js')
+        ]);
+    }
+
+    public function sowActivity($sowId) {
+        $sow = Sow::where('id', $sowId)->first();
+
+        return view('pages.admin.sow-activity', [
+            'title' => $sow->sow_no . '\'s Activity/Schedule',
+            'js' => asset('js/pages/dashboard/admin/sow-activity.js'),
+            'sow' => $sow
         ]);
     }
 }

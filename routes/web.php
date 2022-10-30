@@ -50,6 +50,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/index', [AdminDashboardController::class, 'index']);
         Route::get('/user-management', [AdminDashboardController::class, 'userManagement']);
         Route::get('/sow-management', [AdminDashboardController::class, 'sowManagement']);
+        Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'sowActivity']);
     });
 
     /* -- ---------- Staff ----------- -- */

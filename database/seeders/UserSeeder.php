@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'SowFMS Staff',
             'email' => 'staff@sowfms.com',
+            'phone' => '09156390981',
             'password' => bcrypt('staff@1234'),
             'role' => 'Staff'
         ]);
