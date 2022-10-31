@@ -53,3 +53,9 @@ $(document).on('click', '#addNewSetBtn', function () {
         }
     });
 });
+
+$(document).on('click', '#addMatingBtn', function () {
+    const data = $(this).data();
+    showModal($('#addMatingModal'));
+    $('#addMatingForm').find('input[name="litter_no"]').val(data.litter_no);
+});

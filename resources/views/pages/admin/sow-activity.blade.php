@@ -156,6 +156,9 @@
                                                                 <div class="card">
                                                                     <div class="card-header text-center">
                                                                         <strong>Mating</strong>
+                                                                        <button type="button" id="addMatingBtn" data-litter_no="{{ $litter->litter_no }}" class="btn btn-link float-right">
+                                                                            <i class="fa fa-plus"></i>
+                                                                        </button>
                                                                     </div>
                                                                     <table class="table table-bordered" style="width: 100%">
                                                                         <thead>
@@ -178,6 +181,9 @@
                                                                 <div class="card">
                                                                     <div class="card-header text-center">
                                                                         <strong>Farrowing</strong>
+                                                                        <button type="button" class="btn btn-link float-right">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button>
                                                                     </div>
                                                                     <table class="table table-bordered" style="width: 100%">
                                                                         <thead>
@@ -203,6 +209,9 @@
                                                                 <div class="card">
                                                                     <div class="card-header text-center">
                                                                         <strong>Weaning</strong>
+                                                                        <button type="button" class="btn btn-link float-right">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button>
                                                                     </div>
                                                                     <table class="table table-bordered" style="width: 100%">
                                                                         <thead>
@@ -248,6 +257,33 @@
             </div>
         @endif
 
+    </div>
+
+    <! -- ----- Modals ----- -- !>
+    <div id="addMatingModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="addMatingForm" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Mating Schedule</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" name="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Boar</label>
+                        <input type="text" name="boar" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="litter_no">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
 
