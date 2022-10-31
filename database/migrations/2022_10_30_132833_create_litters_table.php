@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('litters', function (Blueprint $table) {
             $table->id();
+            $table->string('litter_no');
             $table->foreignId('sow_id');
             $table->timestamps();
         });
