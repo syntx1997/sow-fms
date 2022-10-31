@@ -9,6 +9,7 @@ class Litter extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'sow_id'
+        'sow_id',
+        'litter_no'
     ];
 }

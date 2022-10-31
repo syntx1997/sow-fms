@@ -136,9 +136,108 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="breeding" role="tabpanel">
-                                <button type="button" class="float-right btn btn-primary mt-3">
+                                <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
                                     <i class="fa fa-plus"></i> Add New Set
                                 </button>
+                                @if(! \App\Models\Litter::where('sow_id', $sow->id)->first())
+                                    <p>no schedules yet</p>
+                                @else
+                                    <div id="accordion-one" class="accordion accordion-primary">
+                                        @foreach(\App\Models\Litter::where('sow_id', $sow->id)->get() as $index => $litter)
+                                            <div class="accordion__item">
+                                                <div class="accordion__header {{ $index !== 0 ? 'collapsed' : '' }} rounded-lg" data-toggle="collapse" data-target="#{{ $litter->litter_no }}">
+                                                    <span class="accordion__header--text font-weight-bold">#{{ $litter->litter_no }}</span>
+                                                    <span class="accordion__header--indicator"></span>
+                                                </div>
+                                                <div id="{{ $litter->litter_no }}" class="collapse accordion__body {{ $index == 0 ? 'show' : '' }}" data-parent="#accordion-one">
+                                                    <div class="accordion__body--text">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                                                <div class="card">
+                                                                    <div class="card-header text-center">
+                                                                        <strong>Mating</strong>
+                                                                    </div>
+                                                                    <table class="table table-bordered" style="width: 100%">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th class="text-center" style="font-size: 10px">DATE</th>
+                                                                            <th class="text-center" style="font-size: 10px">BOAR</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        @if(! \App\Models\Mating::where('litter_no', $litter->litter_no)->first())
+                                                                            <tr>
+                                                                                <td colspan="2" class="text-center" style="font-size: 10px">not set</td>
+                                                                            </tr>
+                                                                        @endif
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                                                <div class="card">
+                                                                    <div class="card-header text-center">
+                                                                        <strong>Farrowing</strong>
+                                                                    </div>
+                                                                    <table class="table table-bordered" style="width: 100%">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th class="text-center" style="font-size: 10px">ACTUAL DATE</th>
+                                                                            <th class="text-center" style="font-size: 10px">STATUS</th>
+                                                                            <th class="text-center" style="font-size: 10px">AVE. WT.</th>
+                                                                            <th class="text-center" style="font-size: 10px">FOSTER MI -/+</th>
+                                                                            <th class="text-center" style="font-size: 10px">FROM/TO SOW</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        @if(! \App\Models\Farrowing::where('litter_no', $litter->litter_no)->first())
+                                                                            <tr>
+                                                                                <td colspan="5" class="text-center" style="font-size: 10px">not set</td>
+                                                                            </tr>
+                                                                        @endif
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                                                <div class="card">
+                                                                    <div class="card-header text-center">
+                                                                        <strong>Weaning</strong>
+                                                                    </div>
+                                                                    <table class="table table-bordered" style="width: 100%">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th class="text-center" style="font-size: 10px">DATE</th>
+                                                                            <th class="text-center" style="font-size: 10px">NO.</th>
+                                                                            <th class="text-center" style="font-size: 10px">AVE. WT.</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        @if(! \App\Models\Weaning::where('litter_no', $litter->litter_no)->first())
+                                                                            <tr>
+                                                                                <td colspan="3" class="text-center" style="font-size: 10px">not set</td>
+                                                                            </tr>
+                                                                        @endif
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label>Remarks</label>
+                                                                    <textarea name="remarks" class="form-control"></textarea>
+                                                                    <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                             <div class="tab-pane fade" id="feeding">
 
@@ -162,5 +261,8 @@
         $(function () {
             $('select[name="user_id"]').select2();
         });
+    </script>
+    <script>
+        const sow_id = '{{ $sow->id }}';
     </script>
 @endpush

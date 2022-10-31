@@ -6,8 +6,10 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\StaffDashboardController;
+
 use App\Http\Controllers\SowController;
 use App\Http\Controllers\AssignController;
+use App\Http\Controllers\LitterController;
 
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
@@ -40,6 +42,11 @@ Route::prefix('/func')->group(function () {
         Route::post('/delete', [SowController::class, 'delete']);
         Route::post('/edit', [SowController::class, 'edit']);
         Route::post('/assign-staff', [AssignController::class, 'add']);
+    });
+
+    /* -- ---------- Litter ----------- -- */
+    Route::prefix('/litter')->group(function () {
+        Route::post('/add', [LitterController::class, 'add']);
     });
 
 });
