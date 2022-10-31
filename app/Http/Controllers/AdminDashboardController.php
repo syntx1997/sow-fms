@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assign;
 use App\Models\Sow;
 
 class AdminDashboardController extends Controller
@@ -29,11 +30,13 @@ class AdminDashboardController extends Controller
 
     public function sowActivity($sowId) {
         $sow = Sow::where('id', $sowId)->first();
+        $assign = Assign::where('sow_id', $sowId)->first();
 
         return view('pages.admin.sow-activity', [
             'title' => $sow->sow_no . '\'s Activity/Schedule',
             'js' => asset('js/pages/dashboard/admin/sow-activity.js'),
-            'sow' => $sow
+            'sow' => $sow,
+            'assign' => $assign
         ]);
     }
 }

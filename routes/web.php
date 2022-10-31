@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\SowController;
+use App\Http\Controllers\AssignController;
 
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
@@ -38,6 +39,7 @@ Route::prefix('/func')->group(function () {
         Route::get('/get-all', [SowController::class, 'getAll']);
         Route::post('/delete', [SowController::class, 'delete']);
         Route::post('/edit', [SowController::class, 'edit']);
+        Route::post('/assign-staff', [AssignController::class, 'add']);
     });
 
 });

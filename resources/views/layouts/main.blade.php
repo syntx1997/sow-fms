@@ -23,6 +23,8 @@
 	<link href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
+    @stack('css')
+
 </head>
 <body>
     <!--*******************
