@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('matings', function (Blueprint $table) {
+        Schema::create('farrowings', function (Blueprint $table) {
             $table->id();
             $table->string('litter_no');
-            $table->date('date');
-            $table->string('boar');
+            $table->date('actual_date');
+            $table->string('status');
+            $table->integer('weight');
+            $table->string('foster');
+            $table->string('sow');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matings');
+        Schema::dropIfExists('farrowings');
     }
 };
