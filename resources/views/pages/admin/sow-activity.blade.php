@@ -126,7 +126,7 @@
                 <div class="card-body">
                     <!-- Nav tabs -->
                     <div class="custom-tab-1">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs mb-2">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#breeding">Breeding</a>
                             </li>
@@ -136,9 +136,6 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="breeding" role="tabpanel">
-                                <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
-                                    <i class="fa fa-plus"></i> Add New Set
-                                </button>
                                 @if(! \App\Models\Litter::where('sow_id', $sow->id)->first())
                                     <p>no schedules yet</p>
                                 @else
@@ -172,6 +169,13 @@
                                                                             <tr>
                                                                                 <td colspan="2" class="text-center" style="font-size: 10px">not set</td>
                                                                             </tr>
+                                                                        @else
+                                                                            @foreach(\App\Models\Mating::where('litter_no', $litter->litter_no)->get() as $mating)
+                                                                                <tr>
+                                                                                    <td class="text-center" style="font-size: 10px">{{ $mating->date }}</td>
+                                                                                    <td class="text-center" style="font-size: 10px">{{ $mating->boar }}</td>
+                                                                                </tr>
+                                                                            @endforeach
                                                                         @endif
                                                                         </tbody>
                                                                     </table>
@@ -247,6 +251,9 @@
                                         @endforeach
                                     </div>
                                 @endif
+                                <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
+                                    <i class="fa fa-plus"></i> Add New Set
+                                </button>
                             </div>
                             <div class="tab-pane fade" id="feeding">
 
@@ -270,7 +277,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Date</label>
-                        <input type="date" name="name" class="form-control">
+                        <input type="date" name="date" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Boar</label>

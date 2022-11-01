@@ -1,6 +1,10 @@
 const assignStaffForm = $('#assignStaffForm');
 const assignStaffSubmitBtn = assignStaffForm.find('button[type="submit"]');
 
+const addMatingForm = $('#addMatingForm');
+const addMatingSubmitBtn = addMatingForm.find('button[type="submit"]');
+const addMatingModal = $('#addMatingModal');
+
 $(function () {
     assignStaffForm.on('submit', function (e) {
         e.preventDefault();
@@ -24,6 +28,41 @@ $(function () {
             },
             complete: function () {
                 submitBtnAfterSend(assignStaffSubmitBtn, 'Assign');
+            }
+        });
+    });
+
+    addMatingForm.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/mating/add',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'JSON',
+            success: function (res) {
+                successAndReloadAfterSeconds(2000, res.message);
+            },
+            error: function (err) {
+                const errJSON = err.responseJSON;
+                if(errJSON.errors) {
+                    const errMessages = errJSON.errors;
+                    $.each(errMessages, function (field, error) {
+                        const Validation = new CustomValidation();
+                        const input = formInput(addMatingForm, 'input', field);
+
+                        Validation.validate(input, error);
+                    });
+                }
+
+                if(errJSON.message) {
+                    Swal.fire('Error', errJSON.message, 'error');
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(addMatingSubmitBtn, 'Adding');
+            },
+            complete: function () {
+                submitBtnAfterSend(addMatingSubmitBtn, 'Add');
             }
         });
     });

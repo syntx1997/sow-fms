@@ -9,7 +9,9 @@ use App\Http\Controllers\StaffDashboardController;
 
 use App\Http\Controllers\SowController;
 use App\Http\Controllers\AssignController;
+
 use App\Http\Controllers\LitterController;
+use App\Http\Controllers\MatingController;
 
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
@@ -47,6 +49,11 @@ Route::prefix('/func')->group(function () {
     /* -- ---------- Litter ----------- -- */
     Route::prefix('/litter')->group(function () {
         Route::post('/add', [LitterController::class, 'add']);
+    });
+
+    /* -- ---------- Mating ----------- -- */
+    Route::prefix('/mating')->group(function () {
+        Route::post('/add', [MatingController::class, 'add']);
     });
 
 });

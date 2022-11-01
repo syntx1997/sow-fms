@@ -200,3 +200,11 @@ $(function () {
         }, 1000);
     });
 });
+
+const successAndReloadAfterSeconds = (seconds, message) => {
+    $('.modal').modal('hide');
+    Swal.fire('Success', message, 'success');
+    setInterval(function () {
+        location.reload();
+    }, seconds);
+}
