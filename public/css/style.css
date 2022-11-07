@@ -5,7 +5,7 @@
     Name                 : Zenix
     Author               : DexignZone
     Author Portfolio     : https://themeforest.net/user/dexignzone/portfolio
-    
+
 
 
     Table of Sass Contents
@@ -17,7 +17,7 @@
         _mixin
         _variable
 
-    2. bootstrap 
+    2. bootstrap
         -Here goes all official bootstrap scss files
 
     3. Global/Base
@@ -73,7 +73,8 @@
 @import url(../vendor/perfect-scrollbar/css/perfect-scrollbar.css);
 @import url(../vendor/metismenu/css/metisMenu.min.css);
 :root {
-  --primary: #eb8153;
+    /*--primary: #eb8153;*/
+  --primary: #0e5705;
   --secondary: #6418C3;
   --primary-hover: #e66025;
   --primary-light: #fbe5dc;
@@ -20264,7 +20265,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   border: none;
   overflow: hidden; }
 
-/* 
+/*
 svg text {
     font-weight: 600 !important;
 } */
@@ -26533,7 +26534,7 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
     margin-bottom: -130px;
 	background-size:cover;
 	&>div{
-		
+
 	}
 } */
 .plus-icon {

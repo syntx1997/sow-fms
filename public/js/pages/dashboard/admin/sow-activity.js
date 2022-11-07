@@ -98,3 +98,15 @@ $(document).on('click', '#addMatingBtn', function () {
     showModal($('#addMatingModal'));
     $('#addMatingForm').find('input[name="litter_no"]').val(data.litter_no);
 });
+
+$(document).on('click', '#editMatingBtn', function (e) {
+    e.preventDefault();
+    const data = $(this).data('data');
+    console.log(data);
+});
+
+$(document).on('click', '#deleteMatingBtn', function (e) {
+    e.preventDefault();
+    const data = $(this).data('data');
+    console.log(data);
+});

@@ -162,6 +162,7 @@
                                                                         <tr>
                                                                             <th class="text-center" style="font-size: 10px">DATE</th>
                                                                             <th class="text-center" style="font-size: 10px">BOAR</th>
+                                                                            <th class="text-center" style="font-size: 10px"></th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -173,7 +174,15 @@
                                                                             @foreach(\App\Models\Mating::where('litter_no', $litter->litter_no)->get() as $mating)
                                                                                 <tr>
                                                                                     <td class="text-center" style="font-size: 10px">{{ $mating->date }}</td>
-                                                                                    <td class="text-center" style="font-size: 10px">{{ $mating->boar }}</td>
+                                                                                    <td class="text-center align-middle" style="font-size: 10px">{{ $mating->boar }}</td>
+                                                                                    <td class="text-center align-middle" style="font-size: 14px;padding: 0px">
+                                                                                        <a href="#" id="editMatingBtn" data-data="{{ json_encode($mating) }}">
+                                                                                            <i class="fa fa-edit"></i>
+                                                                                        </a>
+                                                                                        <a href="#" id="deleteMatingBtn" data-data="{{ json_encode($mating) }}">
+                                                                                            <i class="fa fa-trash"></i>
+                                                                                        </a>
+                                                                                    </td>
                                                                                 </tr>
                                                                             @endforeach
                                                                         @endif

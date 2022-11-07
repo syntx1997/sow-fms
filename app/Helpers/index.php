@@ -29,3 +29,10 @@ if(!function_exists('viewActivitiesBtn')) {
         HERE;
     }
 }
+
+/*-- ----------- PHP Array to HTML data attribute -----------  --*/
+if(!function_exists('arrayToHTMLDataAttr')) {
+    function arrayToHTMLDataAttr($data) {
+        return htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8');
+    }
+}

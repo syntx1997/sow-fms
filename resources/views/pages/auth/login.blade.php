@@ -9,7 +9,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <div class="text-center mb-3">
-                                        <img src="{{ asset('images/pig.png') }}" alt="logo" style="width: 80px">
+                                        <img src="{{ asset('images/st-logo-text.png') }}" alt="logo" style="width: 150px">
                                     </div>
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     <form id="login-form">
