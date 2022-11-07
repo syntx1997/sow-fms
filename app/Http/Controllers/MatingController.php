@@ -26,6 +26,6 @@ class MatingController extends Controller
             return response(['message' => 'New mating schedule added successfully!'], 201);
         }
 
-        return response(['message' => 'Maximum of three rows exceeded!'], 401);
+        return response(['message' => 'Maximum of three(3) mating schedule exceeded!'], 401);
     }
 }
