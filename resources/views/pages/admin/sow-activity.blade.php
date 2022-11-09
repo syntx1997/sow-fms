@@ -194,7 +194,7 @@
                                                                 <div class="card">
                                                                     <div class="card-header text-center">
                                                                         <strong>Farrowing</strong>
-                                                                        <button type="button" class="btn btn-link float-right">
+                                                                        <button type="button" id="editFarrowingBtn" class="btn btn-link float-right" data-litter_no="{{ $litter->litter_no }}" data-farrowing="{{ json_encode(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->first()) }}">
                                                                             <i class="fa fa-edit"></i>
                                                                         </button>
                                                                     </div>
@@ -301,6 +301,69 @@
             </form>
         </div>
     </div>
+
+    <div id="editMatingModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="editMatingForm" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Mating Schedule</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Boar</label>
+                        <input type="text" name="boar" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editFarrowingModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="editFarrowingForm" class="modal-content">
+                @csrf
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Actual Date</label>
+                        <input type="date" name="actual_date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <input type="text" name="status" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Ave. Weight</label>
+                        <input type="text" name="weight" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Foster MI -/+</label>
+                        <input type="text" name="foster" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>From/To Sow</label>
+                        <input type="text" name="sow" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="litter_no">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 
 @push('css')

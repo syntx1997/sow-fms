@@ -28,4 +28,39 @@ class MatingController extends Controller
 
         return response(['message' => 'Maximum of three(3) mating schedule exceeded!'], 401);
     }
+
+    public function edit(Request $request) {
+        $validator = Validator::make($request->all(), [
+           'id' => 'required',
+           'date' => 'required',
+            'boar' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()], 401);
+        }
+
+        $mating = Mating::find($request->id);
+        $mating->update([
+            'date' => $request->date,
+            'boar' => $request->boar
+        ]);
+
+        return response(['message' => 'Mating schedule edited successfully!'], 201);
+    }
+
+    public function delete(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()], 401);
+        }
+
+        $mating = Mating::find($request->id);
+        $mating->delete();
+
+        return response(['message' => 'Mating schedule deleted successfully!'], 201);
+    }
 }

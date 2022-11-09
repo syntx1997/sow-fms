@@ -54,6 +54,8 @@ Route::prefix('/func')->group(function () {
     /* -- ---------- Mating ----------- -- */
     Route::prefix('/mating')->group(function () {
         Route::post('/add', [MatingController::class, 'add']);
+        Route::post('/edit', [MatingController::class, 'edit']);
+        Route::post('/delete', [MatingController::class, 'delete']);
     });
 
 });
