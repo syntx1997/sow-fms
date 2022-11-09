@@ -17,9 +17,9 @@
                     </a>
                 </li>
                 <li class="nav-label first">Main Menu</li>
-                <li><a href="{{ url('/dashboard/admin/sow-management') }}" class="ai-icon" aria-expanded="false">
+                <li><a href="{{ url('/dashboard/admin/pig-management') }}" class="ai-icon" aria-expanded="false">
                         <i class="flaticon-089-piggy-bank"></i>
-                        <span class="nav-text">Sow Management</span>
+                        <span class="nav-text">Pig Management</span>
                     </a>
                 </li>
                 <li><a href="{{ url('/dashboard/admin/user-management') }}" class="ai-icon" aria-expanded="false">

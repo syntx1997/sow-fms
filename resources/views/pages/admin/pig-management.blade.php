@@ -5,18 +5,19 @@
         <div class="card">
             <div class="card-header d-sm-flex d-block">
                 <div class="mr-auto mb-sm-0 mb-3">
-                    <h4 class="card-title mb-2">Sow Management</h4>
+                    <h4 class="card-title mb-2">Pig Management</h4>
                     <span>Sow List</span>
                 </div>
-                <button class="btn btn-info" data-toggle="modal" data-target="#addSowModal"><i class="fa fa-plus"></i> Add Sow</button>
+                <button class="btn btn-info" data-toggle="modal" data-target="#addPigModal"><i class="fa fa-plus"></i> Add Pig</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive1">
-                    <table class="table style-1" id="sowTable">
+                    <table class="table style-1" id="pigTable">
                         <thead>
                         <tr>
                             <th></th>
-                            <th>SOW No.</th>
+                            <th>TYPE</th>
+                            <th>PIG No.</th>
                             <th>BREED</th>
                             <th>DATE BORN</th>
                             <th>ORIGIN</th>
@@ -32,13 +33,13 @@
         </div>
     </div>
 
-    <div id="addSowModal" class="modal fade" tabindex="-1">
+    <div id="addPigModal" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <form id="addSowForm" class="modal-content">
+            <form id="addPigForm" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fa fa-plus"></i> Add Sow
+                        <i class="fa fa-plus"></i> Add Pig
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>&times;</span>
@@ -79,6 +80,30 @@
                         <label class="col-3">Sire</label>
                         <div class="col-9">
                             <input type="text" name="sire" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-3">Type</label>
+                        <div class="col-9">
+                            <select name="type" class="form-control">
+                                <option value="Sow">Sow</option>
+                                <option value="Boar">Boar</option>
+                                <option value="Piglet">Piglet</option>
+                                <option value="Gilt">Gilt</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-3">Photo</label>
+                        <div class="col-9">
+                            <div id="photo">
+                                <img src="{{ asset('storage/pigs-photo/no-img.png') }}" style="width: 100%">
+                            </div>
+                            <button type="button" id="uploadPhotoBtn" class="btn btn-light mt-2">
+                                <i class="fa fa-upload"></i> Upload Photo
+                            </button>
+                            <input type="file" name="photo" style="display: none">
                         </div>
                     </div>
                 </div>
@@ -90,13 +115,13 @@
         </div>
     </div>
 
-    <div id="editSowModal" class="modal fade" tabindex="-1">
+    <div id="editPigModal" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <form id="editSowForm" class="modal-content">
+            <form id="editPigForm" class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fa fa-edit"></i> Edit Sow
+                        <i class="fa fa-edit"></i> Edit Pig
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>&times;</span>
@@ -104,9 +129,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-3">Sow No.</label>
+                        <label class="col-3">Pig No.</label>
                         <div class="col-9">
-                            <input type="text" name="sowNo" class="form-control" readonly>
+                            <input type="text" name="pigNo" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -143,6 +168,19 @@
                         <label class="col-3">Sire</label>
                         <div class="col-9">
                             <input type="text" name="sire" class="form-control">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-3">Photo</label>
+                        <div class="col-9">
+                            <div id="photo">
+                                <img src="{{ asset('storage/pigs-photo/no-img.png') }}" style="width: 100%">
+                            </div>
+                            <button type="button" id="uploadPhotoBtn" class="btn btn-light mt-2">
+                                <i class="fa fa-upload"></i> Upload Photo
+                            </button>
+                            <input type="file" name="photo" style="display: none">
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\StaffDashboardController;
 
-use App\Http\Controllers\SowController;
+use App\Http\Controllers\PigController;
 use App\Http\Controllers\AssignController;
 
 use App\Http\Controllers\LitterController;
@@ -37,12 +37,12 @@ Route::prefix('/func')->group(function () {
         Route::post('update/staff', [UserController::class, 'updateStaff']);
     });
 
-    /* -- ---------- Sow ----------- -- */
-    Route::prefix('/sow')->group(function () {
-        Route::post('/add', [SowController::class, 'add']);
-        Route::get('/get-all', [SowController::class, 'getAll']);
-        Route::post('/delete', [SowController::class, 'delete']);
-        Route::post('/edit', [SowController::class, 'edit']);
+    /* -- ---------- Pig ----------- -- */
+    Route::prefix('/pig')->group(function () {
+        Route::post('/add', [PigController::class, 'add']);
+        Route::get('/get-all', [PigController::class, 'getAll']);
+        Route::post('/delete', [PigController::class, 'delete']);
+        Route::post('/edit', [PigController::class, 'edit']);
         Route::post('/assign-staff', [AssignController::class, 'add']);
     });
 
@@ -67,7 +67,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::middleware('admin.only')->prefix('/admin')->group(function () {
         Route::get('/index', [AdminDashboardController::class, 'index']);
         Route::get('/user-management', [AdminDashboardController::class, 'userManagement']);
-        Route::get('/sow-management', [AdminDashboardController::class, 'sowManagement']);
+        Route::get('/pig-management', [AdminDashboardController::class, 'pigManagement']);
         Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'sowActivity']);
     });
 

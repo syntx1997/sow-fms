@@ -1,22 +1,26 @@
-const addSowModal = $('#addSowModal');
-const addSowForm = $('#addSowForm');
-const addSowSubmitBtn = addSowForm.find('button[type="submit"]');
+const addPigModal = $('#addPigModal');
+const addPigForm = $('#addPigForm');
+const addPigSubmitBtn = addPigForm.find('button[type="submit"]');
 
-const editSowModal = $('#editSowModal');
-const editSowForm = $('#editSowForm');
-const editSowSubmitBtn = editSowForm.find('button[type="submit"]');
+const editPigModal = $('#editPigModal');
+const editPigForm = $('#editPigForm');
+const editPigSubmitBtn = editPigForm.find('button[type="submit"]');
 
-const sowTable = $('#sowTable');
+const pigTable = $('#pigTable');
 
 $(function () {
-    const sowDataTable = sowTable.DataTable({
-        'ajax': '/func/sow/get-all',
+    const pigDataTable = pigTable.DataTable({
+        'ajax': '/func/pig/get-all',
         'columns': [
             {
+                'classname': 'text-center',
                 'data': 'viewActivity',
             },
             {
-                'data': 'sow_no',
+                'data': 'type',
+            },
+            {
+                'data': 'pig_no',
             },
             {
                 'data': 'breed',
@@ -52,16 +56,18 @@ $(function () {
         }
     });
 
-    addSowForm.on('submit', function (e) {
+    addPigForm.on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            url: '/func/sow/add',
+            url: '/func/pig/add',
             type: 'POST',
-            data: $(this).serialize(),
+            data: new FormData(this),
             dataType: 'JSON',
+            contentType: false,
+            processData: false,
             success: function (res) {
-                hideModal(addSowModal);
-                reloadDataTable(sowTable);
+                hideModal(addPigModal);
+                reloadDataTable(pigTable);
             },
             error: function (err) {
                 const errJSON = err.responseJSON;
@@ -69,31 +75,31 @@ $(function () {
                     const errors = errJSON.errors;
                     $.each(errors, function (field, errMessage) {
                         const Validation = new CustomValidation();
-                        const input = formInput(addSowForm, 'input', field);
+                        const input = formInput(addPigForm, 'input', field);
 
                         Validation.validate(input, errMessage);
                     });
                 }
             },
             beforeSend: function () {
-                submitBtnBeforeSend(addSowSubmitBtn, 'Adding');
+                submitBtnBeforeSend(addPigSubmitBtn, 'Adding');
             },
             complete: function () {
-                submitBtnAfterSend(addSowSubmitBtn, 'Add');
+                submitBtnAfterSend(addPigSubmitBtn, 'Add');
             }
         });
     });
 
-    editSowForm.on('submit', function (e) {
+    editPigForm.on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            url: '/func/sow/edit',
+            url: '/func/pig/edit',
             type: 'POST',
-            data: $(this).serialize(),
+            data: new FormData(this),
             dataType: 'JSON',
             success: function (res) {
-                hideModal(editSowModal);
-                reloadDataTable(sowTable);
+                hideModal(editPigModal);
+                reloadDataTable(pigTable);
             },
             error: function (err) {
                 const errJSON = err.responseJSON;
@@ -101,38 +107,66 @@ $(function () {
                     const errors = errJSON.errors;
                     $.each(errors, function (field, errMessage) {
                         const Validation = new CustomValidation();
-                        const input = formInput(editSowForm, 'input', field);
+                        const input = formInput(editPigForm, 'input', field);
 
                         Validation.validate(input, errMessage);
                     });
                 }
             },
             beforeSend: function () {
-                submitBtnBeforeSend(editSowSubmitBtn, 'Adding');
+                submitBtnBeforeSend(editPigSubmitBtn, 'Editing');
             },
             complete: function () {
-                submitBtnAfterSend(editSowSubmitBtn, 'Add');
+                submitBtnAfterSend(editPigSubmitBtn, 'Edit');
             }
         });
+    });
+
+    addPigForm.find('#uploadPhotoBtn').on('click', function () {
+        addPigForm.find('input[name="photo"]').click();
+    });
+
+    addPigForm.find('input[name="photo"]').on('change', function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                addPigForm.find('#photo img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    editPigForm.find('#uploadPhotoBtn').on('click', function () {
+        editPigForm.find('input[name="photo"]').click();
+    });
+
+    editPigForm.find('input[name="photo"]').on('change', function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                editPigForm.find('#photo img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
     });
 });
 
-$(document).on('click', '#sowEditBtn', function () {
+$(document).on('click', '#pigEditBtn', function () {
     const data = $(this).data();
 
-    showModal(editSowModal);
+    showModal(editPigModal);
 
-    editSowForm.find('input[name="id"]').val(data.data.id);
-    editSowForm.find('input[name="sowNo"]').val(data.data.sow_no);
-    editSowForm.find('input[name="breed"]').val(data.data.breed);
-    editSowForm.find('input[name="dateBorn"]').val(data.data.date_born);
-    editSowForm.find('input[name="origin"]').val(data.data.origin);
-    editSowForm.find('input[name="dam"]').val(data.data.dam);
-    editSowForm.find('input[name="dateProcured"]').val(data.data.date_procured);
-    editSowForm.find('input[name="sire"]').val(data.data.sire);
+    editPigForm.find('input[name="id"]').val(data.data.id);
+    editPigForm.find('input[name="pigNo"]').val(data.data.pig_no);
+    editPigForm.find('input[name="breed"]').val(data.data.breed);
+    editPigForm.find('input[name="dateBorn"]').val(data.data.date_born);
+    editPigForm.find('input[name="origin"]').val(data.data.origin);
+    editPigForm.find('input[name="dam"]').val(data.data.dam);
+    editPigForm.find('input[name="dateProcured"]').val(data.data.date_procured);
+    editPigForm.find('input[name="sire"]').val(data.data.sire);
 });
 
-$(document).on('click', '#sowDeleteBtn', function () {
+$(document).on('click', '#pigDeleteBtn', function () {
     const data = $(this).data();
 
     Swal.fire({
@@ -146,7 +180,7 @@ $(document).on('click', '#sowDeleteBtn', function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/func/sow/delete',
+                url: '/func/pig/delete',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'POST',
                 data: {
@@ -159,7 +193,7 @@ $(document).on('click', '#sowDeleteBtn', function () {
                         res.message,
                         'success'
                     )
-                    reloadDataTable(sowTable);
+                    reloadDataTable(pigTable);
                 }
             });
         }

@@ -20,8 +20,10 @@ if(!function_exists('editDeleteBtn')) {
 /*-- ----------- This is to show view activities button -----------  --*/
 if(!function_exists('viewActivitiesBtn')) {
     function viewActivitiesBtn($btnName, $data):string {
+        $imgUrl = asset('storage/' . $data['photo']);
         return <<<HERE
-            <div class="d-flex action-button">
+            <div class="action-button text-center">
+                <img src="$imgUrl" style="height: 50px"> <br>
                 <a href="/dashboard/admin/view-activity/{$data['id']}" id="{$btnName}ViewActivityBtn" class="btn btn-link btn-xs light px-2" title="View Activity Schedules">
                     <i class="flaticon-057-eye"></i>
                 </a>

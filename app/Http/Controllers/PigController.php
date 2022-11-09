@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Sow;
+use App\Models\Pig;
 use Illuminate\Support\Facades\Validator;
 
-class SowController extends Controller
+class PigController extends Controller
 {
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
@@ -15,21 +15,30 @@ class SowController extends Controller
             'origin' => 'required',
             'dam' => 'required',
             'dateProcured' => 'required',
-            'sire' => 'required'
+            'sire' => 'required',
+            'type' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()], 401);
         }
 
-        Sow::create([
-            'sow_no' => 'SOW'.str_pad((Sow::count() + 1), 3, '0', STR_PAD_LEFT),
+        if ($request->has('photo')) {
+            $photo = $request->file('photo')->store('pigs-photo', 'public');
+        } else {
+            $photo = 'pigs-photo/no-img.png';
+        }
+
+        Pig::create([
+            'pig_no' => $this->generatePigNo($request->type),
             'breed' => $request->breed,
             'date_born' => $request->dateBorn,
             'origin' => $request->origin,
             'dam' => $request->dam,
             'date_procured' => $request->dateProcured,
-            'sire' => $request->sire
+            'sire' => $request->sire,
+            'type' => $request->type,
+            'photo' => $photo
         ]);
 
         return response(['message' => 'New sow added successfully'], 201);
@@ -50,7 +59,7 @@ class SowController extends Controller
             return response(['errors' => $validator->errors()], 401);
         }
 
-        $sow = Sow::find($request->id);
+        $sow = Pig::find($request->id);
         $sow->update([
             'breed' => $request->breed,
             'date_born' => $request->dateBorn,
@@ -66,11 +75,11 @@ class SowController extends Controller
     public function getAll() {
         $data = [];
 
-        $sows = Sow::all();
-        foreach ($sows as $sow) {
-            $data[] = array_merge($sow->toArray(), [
-                'viewActivity' => viewActivitiesBtn('sow', $sow),
-                'actions' => editDeleteBtn('sow', $sow)
+        $pigs = Pig::all();
+        foreach ($pigs as $pig) {
+            $data[] = array_merge($pig->toArray(), [
+                'viewActivity' => viewActivitiesBtn('sow', $pig),
+                'actions' => editDeleteBtn('pig', $pig)
             ]);
         }
 
@@ -86,9 +95,31 @@ class SowController extends Controller
             return response(['errors' => $validator->errors()], 401);
         }
 
-        $sow = Sow::find($request->id);
+        $sow = Pig::find($request->id);
         $sow->delete();
 
         return response(['message' => 'Sow deleted successfully!']);
+    }
+
+    private function generatePigNo($type) {
+        switch ($type) {
+            case 'Sow':
+                $prefix = 'SW';
+                break;
+            case 'Boar':
+                $prefix = 'BR';
+                break;
+            case 'Piglet':
+                $prefix = 'PL';
+                break;
+            case 'Gilt':
+                $prefix = 'GL';
+                break;
+            default:
+                $prefix = '';
+                break;
+        }
+
+        return $prefix . str_pad((Pig::where('type', $type)->count() + 1), 3, '0', STR_PAD_LEFT);
     }
 }

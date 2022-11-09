@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assign;
-use App\Models\Sow;
+use App\Models\Pig;
 
 class AdminDashboardController extends Controller
 {
@@ -21,15 +21,15 @@ class AdminDashboardController extends Controller
         ]);
     }
 
-    public function sowManagement() {
-        return view('pages.admin.sow-management', [
-            'title' => 'Sow Management',
-            'js' => asset('js/pages/dashboard/admin/sow-management.js')
+    public function pigManagement() {
+        return view('pages.admin.pig-management', [
+            'title' => 'Pig Management',
+            'js' => asset('js/pages/dashboard/admin/pig-management.js')
         ]);
     }
 
     public function sowActivity($sowId) {
-        $sow = Sow::where('id', $sowId)->first();
+        $sow = Pig::where('id', $sowId)->first();
         $assign = Assign::where('sow_id', $sowId)->first();
 
         return view('pages.admin.sow-activity', [

@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sows', function (Blueprint $table) {
+        Schema::create('pigs', function (Blueprint $table) {
             $table->id();
-            $table->string('sow_no');
+            $table->string('pig_no');
             $table->string('breed');
             $table->date('date_born');
             $table->string('origin');
             $table->string('dam');
             $table->date('date_procured');
             $table->string('sire');
+            $table->string('type');
+            $table->string('photo')->default('no-img.png')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sows');
+        Schema::dropIfExists('pigs');
     }
 };

@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sow extends Model
+class Pig extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'sow_no',
+        'pig_no',
         'breed',
         'date_born',
         'origin',
         'dam',
         'date_procured',
-        'sire'
+        'sire',
+        'type',
+        'photo'
     ];
 }
