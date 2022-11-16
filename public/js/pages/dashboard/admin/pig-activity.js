@@ -145,7 +145,7 @@ $(document).on('click', '#editMatingBtn', function (e) {
     const data = $(this).data('data');
 
     formInput(editMatingForm, 'input', 'date').val(data.date);
-    formInput(editMatingForm, 'input', 'boar').val(data.boar);
+    formInput(editMatingForm, 'select', 'boar').val(data.boar);
     formInput(editMatingForm, 'input', 'id').val(data.id);
 
     showModal(editMatingModal);

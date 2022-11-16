@@ -290,7 +290,11 @@
                     </div>
                     <div class="form-group">
                         <label>Boar</label>
-                        <input type="text" name="boar" class="form-control">
+                        <select name="boar" class="form-control">
+                            @foreach(\App\Models\Pig::where('type', 'Boar')->get() as $boar)
+                                <option value="{{ $boar->pig_no }}">{{ $boar->pig_no }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -316,7 +320,11 @@
                     </div>
                     <div class="form-group">
                         <label>Boar</label>
-                        <input type="text" name="boar" class="form-control">
+                        <select name="boar" class="form-control">
+                            @foreach(\App\Models\Pig::where('type', 'Boar')->get() as $boar)
+                                <option value="{{ $boar->pig_no }}">{{ $boar->pig_no }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
