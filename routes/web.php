@@ -68,7 +68,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/index', [AdminDashboardController::class, 'index']);
         Route::get('/user-management', [AdminDashboardController::class, 'userManagement']);
         Route::get('/pig-management', [AdminDashboardController::class, 'pigManagement']);
-        Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'sowActivity']);
+        Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'pigActivity']);
     });
 
     /* -- ---------- Staff ----------- -- */

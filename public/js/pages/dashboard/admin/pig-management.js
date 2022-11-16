@@ -96,6 +96,8 @@ $(function () {
             url: '/func/pig/edit',
             type: 'POST',
             data: new FormData(this),
+            contentType: false,
+            processData: false,
             dataType: 'JSON',
             success: function (res) {
                 hideModal(editPigModal);

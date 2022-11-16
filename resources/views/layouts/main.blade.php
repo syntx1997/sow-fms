@@ -124,12 +124,12 @@
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @stack('js')
+
 	<script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
 	<script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('js/demo.js') }}"></script>
-
-    @stack('js')
 
     <script src="{{ asset('js/global.js') }}"></script>
     <script src="{{ $js ?? '' }}"></script>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('assigns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sow_id');
+            $table->foreignId('pig_id');
             $table->foreignId('user_id');
             $table->timestamps();
         });

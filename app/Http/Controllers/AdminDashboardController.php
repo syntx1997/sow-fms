@@ -28,14 +28,14 @@ class AdminDashboardController extends Controller
         ]);
     }
 
-    public function sowActivity($sowId) {
-        $sow = Pig::where('id', $sowId)->first();
-        $assign = Assign::where('sow_id', $sowId)->first();
+    public function pigActivity($pigId) {
+        $pig = Pig::where('id', $pigId)->first();
+        $assign = Assign::where('pig_id', $pigId)->first();
 
-        return view('pages.admin.sow-activity', [
-            'title' => $sow->sow_no . '\'s Activity/Schedule',
-            'js' => asset('js/pages/dashboard/admin/sow-activity.js'),
-            'sow' => $sow,
+        return view('pages.admin.pig-activity', [
+            'title' => $pig->pig_no . '\'s Activity/Schedule',
+            'js' => asset('js/pages/dashboard/admin/pig-activity.js'),
+            'pig' => $pig,
             'assign' => $assign
         ]);
     }

@@ -59,14 +59,22 @@ class PigController extends Controller
             return response(['errors' => $validator->errors()], 401);
         }
 
-        $sow = Pig::find($request->id);
-        $sow->update([
+        $pig = Pig::find($request->id);
+
+        if ($request->has('photo')) {
+            $photo = $request->file('photo')->store('pigs-photo', 'public');
+        } else {
+            $photo = $pig->photo;
+        }
+
+        $pig->update([
             'breed' => $request->breed,
             'date_born' => $request->dateBorn,
             'origin' => $request->origin,
             'dam' => $request->dam,
             'date_procured' => $request->dateProcured,
-            'sire' => $request->sire
+            'sire' => $request->sire,
+            'photo' => $photo
         ]);
 
         return response(['message' => 'Sow updated successfully'], 201);

@@ -194,6 +194,14 @@
     </div>
 
 @endsection
+
+<!-- ----- JavaScript ----- -->
 @push('js')
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/lightgallery/js/lightgallery-all.min.js') }}"></script>
+@endpush
+
+<!-- ----- CSS ----- -->
+@push('css')
+    <link href="{{ asset('vendor/lightgallery/css/lightgallery.min.css') }}" rel="stylesheet">
 @endpush
