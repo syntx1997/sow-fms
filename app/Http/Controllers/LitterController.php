@@ -12,7 +12,7 @@ class LitterController extends Controller
         $litter_no = 'L' . str_pad((Litter::all()->count() + 1), 3, 0, STR_PAD_LEFT);
 
         $validator = Validator::make($request->all(), [
-            'sow_id' => 'required'
+            'pig_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -21,7 +21,7 @@ class LitterController extends Controller
 
         Litter::create([
             'litter_no' => $litter_no,
-            'sow_id' => $request->sow_id
+            'pig_id' => $request->pig_id
         ]);
 
         return response(['message' => 'New set generated!'], 201);

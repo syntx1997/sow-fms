@@ -118,7 +118,7 @@ $(document).on('click', '#addNewSetBtn', function () {
         },
         type: 'POST',
         data: {
-            sow_id: sow_id
+            pig_id: pig_id
         },
         dataType: 'JSON',
         success: function (res) {
