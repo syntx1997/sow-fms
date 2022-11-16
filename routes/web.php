@@ -14,6 +14,7 @@ use App\Http\Controllers\LitterController;
 use App\Http\Controllers\MatingController;
 use App\Http\Controllers\FarrowingController;
 use App\Http\Controllers\WeaningController;
+use App\Http\Controllers\RemarkController;
 
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
@@ -68,6 +69,11 @@ Route::prefix('/func')->group(function () {
     /* -- ---------- Weaning ----------- -- */
     Route::prefix('/weaning')->group(function () {
         Route::post('/edit', [WeaningController::class, 'edit']);
+    });
+
+    /* -- ---------- Remarks ----------- -- */
+    Route::prefix('/remarks')->group(function () {
+        Route::post('/edit', [RemarkController::class, 'edit']);
     });
 
 });

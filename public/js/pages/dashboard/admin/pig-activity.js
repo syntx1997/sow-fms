@@ -17,6 +17,9 @@ const editWeaningForm = $('#editWeaningFom');
 const editWeaningSubmitBtn = editWeaningForm.find('button[type="submit"]');
 const editWeaningModal = $('#editWeaningModal');
 
+const editRemarksForm = $('#editRemarksForm');
+const editRemarksSubmitBtn = editRemarksForm.find('button[type="submit"]');
+
 $(function () {
     assignStaffForm.on('submit', function (e) {
         e.preventDefault();
@@ -278,4 +281,37 @@ $(document).on('click', '#editWeaningBtn', function () {
 
     editWeaningForm.find('input[name="litter_no"]').val(data.litter_no);
     showModal(editWeaningModal);
+});
+
+$(document).on('submit', '#editRemarksForm', function (e) {
+    e.preventDefault();
+    const submitBtn = $(this).find('button[type="submit"]');
+    const form = $(this);
+
+    $.ajax({
+        url: '/func/remarks/edit',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'JSON',
+        success: function (res) {
+            successAndReloadAfterSeconds(2000, res.message);
+        },
+        error: function (err) {
+            const errJSON = err.responseJSON;
+            if (errJSON.errors) {
+                const errors = errJSON.errors;
+                const Validation = new CustomValidation();
+                $.each(errors, function (field, errMsg) {
+                    const input = formInput(form, 'textarea', field);
+                    Validation.validate(input, errMsg);
+                });
+            }
+        },
+        beforeSend: function () {
+            submitBtnBeforeSend(submitBtn, 'Saving');
+        },
+        complete: function () {
+            submitBtnAfterSend(submitBtn, 'Save');
+        }
+    });
 });

@@ -263,11 +263,33 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                                                <div class="form-group">
-                                                                    <label>Remarks</label>
-                                                                    <textarea name="remarks" class="form-control"></textarea>
-                                                                    <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
-                                                                </div>
+                                                                @if(\App\Models\Remark::where('litter_no', $litter->litter_no)->count() == 0)
+                                                                    <div class="form-group">
+                                                                        <form id="editRemarksForm">
+                                                                            @csrf
+                                                                            <label>Remarks</label>
+                                                                            <textarea name="remarks" class="form-control"></textarea>
+                                                                            <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
+                                                                            <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
+                                                                        </form>
+                                                                    </div>
+                                                                @else
+                                                                    <strong>Remarks:</strong> <br>
+                                                                    @php
+                                                                    $remarks = \App\Models\Remark::where('litter_no', $litter->litter_no)->first();
+                                                                    @endphp
+                                                                    {{ $remarks->remarks }} <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#editRemarks{{ $litter->litter_no }}"><i class="fa fa-edit"></i></button>
+                                                                    <div class="collapse" id="editRemarks{{ $litter->litter_no }}">
+                                                                        <div class="form-group">
+                                                                            <form id="editRemarksForm">
+                                                                                @csrf
+                                                                                <textarea name="remarks" class="form-control">{{ $remarks->remarks }}</textarea>
+                                                                                <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
+                                                                                <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
