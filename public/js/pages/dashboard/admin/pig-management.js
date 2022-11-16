@@ -66,6 +66,8 @@ $(function () {
             contentType: false,
             processData: false,
             success: function (res) {
+                resetForm(addPigForm);
+                addPigForm.find('#photo img').attr('src', '/storage/pigs-photo/no-img.png');
                 hideModal(addPigModal);
                 reloadDataTable(pigTable);
             },
