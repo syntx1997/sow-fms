@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('litter_no');
             $table->date('actual_date');
             $table->string('status');
-            $table->integer('weight');
-            $table->string('foster');
-            $table->string('sow');
+            $table->double('weight');
+            $table->integer('dead');
+            $table->integer('alive');
+            $table->string('sow')->nullable();
             $table->timestamps();
         });
     }

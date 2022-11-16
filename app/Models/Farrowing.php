@@ -13,7 +13,8 @@ class Farrowing extends Model
         'actual_date',
         'status',
         'weight',
-        'foster',
+        'dead',
+        'alive',
         'sow'
     ];
 }

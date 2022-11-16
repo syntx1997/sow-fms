@@ -209,6 +209,15 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                        @foreach(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->get() as $farrowing)
+                                                                            <tr>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $farrowing->actual_date }}</td>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $farrowing->status }}</td>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $farrowing->weight }}</td>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $farrowing->dead }} / {{ $farrowing->alive }}</td>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $farrowing->sow }}</td>
+                                                                            </tr>
+                                                                        @endforeach
                                                                         @if(! \App\Models\Farrowing::where('litter_no', $litter->litter_no)->first())
                                                                             <tr>
                                                                                 <td colspan="5" class="text-center" style="font-size: 10px">not set</td>
@@ -222,7 +231,7 @@
                                                                 <div class="card">
                                                                     <div class="card-header text-center">
                                                                         <strong>Weaning</strong>
-                                                                        <button type="button" class="btn btn-link float-right">
+                                                                        <button type="button" id="editWeaningBtn" class="btn btn-link float-right" data-litter_no="{{ $litter->litter_no }}" data-weaning="{{ json_encode(\App\Models\Weaning::where('litter_no', $litter->litter_no)->first()) }}">
                                                                             <i class="fa fa-edit"></i>
                                                                         </button>
                                                                     </div>
@@ -235,6 +244,13 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                        @foreach(\App\Models\Weaning::where('litter_no', $litter->litter_no)->get() as $weaning)
+                                                                            <tr>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $weaning->date }}</td>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $weaning->number }}</td>
+                                                                                <td class="text-center" style="font-size: 10px">{{ $weaning->weight }}</td>
+                                                                            </tr>
+                                                                        @endforeach
                                                                         @if(! \App\Models\Weaning::where('litter_no', $litter->litter_no)->first())
                                                                             <tr>
                                                                                 <td colspan="3" class="text-center" style="font-size: 10px">not set</td>
@@ -340,7 +356,9 @@
         <div class="modal-dialog modal-dialog-centered">
             <form id="editFarrowingForm" class="modal-content">
                 @csrf
-                <div class="modal-header"></div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Farrowing Schedule</h5>
+                </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Actual Date</label>
@@ -354,19 +372,69 @@
                         <label>Ave. Weight</label>
                         <input type="text" name="weight" class="form-control">
                     </div>
+                    <hr>
                     <div class="form-group">
-                        <label>Foster MI -/+</label>
-                        <input type="text" name="foster" class="form-control">
+                        <label class="font-weight-bold">Foster MI -/+</label>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Alive <strong>(+)</strong></label>
+                                    <input type="number" name="alive" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Dead <strong>(-)</strong></label>
+                                    <input type="number" name="dead" class="form-control">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <hr>
                     <div class="form-group">
-                        <label>From/To Sow</label>
-                        <input type="text" name="sow" class="form-control">
+                        <label>From/To Sow <small>(Optional)</small></label>
+                        <select name="sow" class="form-control">
+                            @foreach(\App\Models\Pig::where('type', 'Sow')->get() as $sow)
+                                <option value="">-- select --</option>
+                                <option value="{{ $sow->pig_no }}">{{ $sow->pig_no }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="litter_no">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editWeaningModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="editWeaningFom" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Weaning Schedule</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>No.</label>
+                        <input type="number" name="number" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Ave. Weight</label>
+                        <input type="number" name="weight" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="litter_no">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
             </form>
         </div>

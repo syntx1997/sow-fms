@@ -10,8 +10,12 @@ const editMatingSubmitBtn = editMatingForm.find('button[type="submit"]');
 const editMatingModal = $('#editMatingModal');
 
 const editFarrowingForm = $('#editFarrowingForm');
-const editFarrowingSubmitBtn = editFarrowingForm.find('input[type="submit"]');
+const editFarrowingSubmitBtn = editFarrowingForm.find('button[type="submit"]');
 const editFarrowingModal = $('#editFarrowingModal');
+
+const editWeaningForm = $('#editWeaningFom');
+const editWeaningSubmitBtn = editWeaningForm.find('button[type="submit"]');
+const editWeaningModal = $('#editWeaningModal');
 
 $(function () {
     assignStaffForm.on('submit', function (e) {
@@ -107,6 +111,68 @@ $(function () {
             }
         });
     });
+
+    editFarrowingForm.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/farrowing/edit',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'JSON',
+            success: function (res) {
+                hideModal(editFarrowingModal);
+                successAndReloadAfterSeconds(2000, res.message);
+            },
+            error: function (err) {
+                errJSON = err.responseJSON;
+                if (errJSON.errors) {
+                    const errors = errJSON.errors;
+                    const Validation = new CustomValidation();
+                    $.each(errors, function (field, errMsg) {
+                        const input = formInput(editFarrowingForm, 'input', field);
+                        Validation.validate(input, errMsg);
+                    });
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(editFarrowingSubmitBtn, 'Editing');
+            },
+            complete: function () {
+                submitBtnAfterSend(editFarrowingSubmitBtn, 'Edit');
+            }
+        });
+    });
+
+    editWeaningForm.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/weaning/edit',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'JSON',
+            success: function (res) {
+                hideModal(editWeaningModal);
+                successAndReloadAfterSeconds(2000, res.message);
+            },
+            error: function (err) {
+                errJSON = err.responseJSON;
+                if (errJSON.errors) {
+                    const errors = errJSON.errors;
+                    const Validation = new CustomValidation();
+                    $.each(errors, function (field, errMsg) {
+                        const input = formInput(editWeaningForm, 'input', field);
+                        Validation.validate(input, errMsg);
+                    });
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(editWeaningSubmitBtn, 'Editing');
+            },
+            complete: function () {
+                submitBtnAfterSend(editWeaningSubmitBtn, 'Edit');
+            }
+        });
+    });
 });
 
 $(document).on('click', '#addNewSetBtn', function () {
@@ -188,9 +254,28 @@ $(document).on('click', '#deleteMatingBtn', function (e) {
 $(document).on('click', '#editFarrowingBtn', function () {
     const data = $(this).data();
 
-    if (data.farrowing === null) {
-        console.log(1);
+    if (data.farrowing !== null) {
+        formInput(editFarrowingForm, 'input', 'actual_date').val(data.farrowing.actual_date);
+        formInput(editFarrowingForm, 'input', 'status').val(data.farrowing.status);
+        formInput(editFarrowingForm, 'input', 'weight').val(data.farrowing.weight);
+        formInput(editFarrowingForm, 'input', 'alive').val(data.farrowing.alive);
+        formInput(editFarrowingForm, 'input', 'dead').val(data.farrowing.dead);
+        formInput(editFarrowingForm, 'select', 'sow').val(data.farrowing.sow);
     }
 
+    editFarrowingForm.find('input[name="litter_no"]').val(data.litter_no);
     showModal(editFarrowingModal);
+});
+
+$(document).on('click', '#editWeaningBtn', function () {
+    const data = $(this).data();
+
+    if (data.weaning !== null) {
+        formInput(editWeaningForm, 'input', 'date').val(data.weaning.date);
+        formInput(editWeaningForm, 'input', 'number').val(data.weaning.number);
+        formInput(editWeaningForm, 'input', 'weight').val(data.weaning.weight);
+    }
+
+    editWeaningForm.find('input[name="litter_no"]').val(data.litter_no);
+    showModal(editWeaningModal);
 });
