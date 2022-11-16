@@ -17,7 +17,7 @@ $(function () {
     assignStaffForm.on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            url: '/func/sow/assign-staff',
+            url: '/func/pig/assign-staff',
             type: 'POST',
             data: $(this).serialize(),
             dataType: 'JSON',

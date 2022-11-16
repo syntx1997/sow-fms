@@ -9,7 +9,7 @@ class Assign extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'sow_id',
+        'pig_id',
         'user_id'
     ];
 }

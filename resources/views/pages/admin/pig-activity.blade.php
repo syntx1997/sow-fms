@@ -13,25 +13,25 @@
                 <div class="card-action card-tabs  mr-auto">
                     <ul class="nav nav-tabs style-2">
                         <li class="nav-item">
-                            <span class="nav-link active">{{ $sow->sow_no }}</span>
+                            <span class="nav-link active">{{ $pig->pig_no }}</span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link">{{ $sow->breed }}</span>
+                            <span class="nav-link">{{ $pig->breed }}</span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link">{{ $sow->date_born }}</span>
+                            <span class="nav-link">{{ $pig->date_born }}</span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link">{{ $sow->origin }}</span>
+                            <span class="nav-link">{{ $pig->origin }}</span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link">{{ $sow->dam }}</span>
+                            <span class="nav-link">{{ $pig->dam }}</span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link">{{ $sow->date_procured }}</span>
+                            <span class="nav-link">{{ $pig->date_procured }}</span>
                         </li>
                         <li class="nav-item">
-                            <span class="nav-link">{{ $sow->sire }}</span>
+                            <span class="nav-link">{{ $pig->sire }}</span>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +48,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <input type="hidden" name="sow_id" value="{{ $sow->id }}">
+                        <input type="hidden" name="pig_id" value="{{ $pig->id }}">
                         <button type="submit" class="btn btn-primary">Assign</button>
                     </form>
                 </div>
@@ -84,38 +84,38 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
-                                <label>Sow No.</label><br>
-                                <h4 class="text-black">{{ $sow->sow_no }}</h4>
+                                <label>Pig No.</label><br>
+                                <h4 class="text-black">{{ $pig->pig_no }}</h4>
                             </div>
                             <div class="form-group">
                                 <label>Breed</label><br>
-                                <h4 class="text-black">{{ $sow->breed }}</h4>
+                                <h4 class="text-black">{{ $pig->breed }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <label>Date Born</label><br>
-                                <h4 class="text-black">{{ $sow->date_born }}</h4>
+                                <h4 class="text-black">{{ $pig->date_born }}</h4>
                             </div>
                             <div class="form-group">
                                 <label>Origin</label><br>
-                                <h4 class="text-black">{{ $sow->origin }}</h4>
+                                <h4 class="text-black">{{ $pig->origin }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <label>DAM</label><br>
-                                <h4 class="text-black">{{ $sow->dam }}</h4>
+                                <h4 class="text-black">{{ $pig->dam }}</h4>
                             </div>
                             <div class="form-group">
                                 <label>Date Procured</label><br>
-                                <h4 class="text-black">{{ $sow->date_procured }}</h4>
+                                <h4 class="text-black">{{ $pig->date_procured }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3">
                             <div class="form-group">
                                 <label>Sire</label><br>
-                                <h4 class="text-black">{{ $sow->sire }}</h4>
+                                <h4 class="text-black">{{ $pig->sire }}</h4>
                             </div>
                         </div>
                     </div>
@@ -136,11 +136,11 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="breeding" role="tabpanel">
-                                @if(! \App\Models\Litter::where('sow_id', $sow->id)->first())
+                                @if(! \App\Models\Litter::where('pig_id', $pig->id)->first())
                                     <p>no schedules yet</p>
                                 @else
                                     <div id="accordion-one" class="accordion accordion-primary">
-                                        @foreach(\App\Models\Litter::where('sow_id', $sow->id)->get() as $index => $litter)
+                                        @foreach(\App\Models\Litter::where('pig_id', $pig->id)->get() as $index => $litter)
                                             <div class="accordion__item">
                                                 <div class="accordion__header {{ $index !== 0 ? 'collapsed' : '' }} rounded-lg" data-toggle="collapse" data-target="#{{ $litter->litter_no }}">
                                                     <span class="accordion__header--text font-weight-bold">#{{ $litter->litter_no }}</span>
@@ -378,6 +378,6 @@
         });
     </script>
     <script>
-        const sow_id = '{{ $sow->id }}';
+        const pig_id = '{{ $pig->id }}';
     </script>
 @endpush

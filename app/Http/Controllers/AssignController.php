@@ -11,7 +11,7 @@ class AssignController extends Controller
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
-            'sow_id' => 'required'
+            'pig_id' => 'required'
         ]);
 
         if ($validator->fails()) {
