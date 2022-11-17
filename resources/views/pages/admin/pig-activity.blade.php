@@ -126,7 +126,7 @@
                 <div class="card-body">
                     <!-- Nav tabs -->
                     <div class="custom-tab-1">
-                        <ul class="nav nav-tabs mb-2">
+                        <ul class="nav nav-tabs mb-5">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#breeding">Breeding</a>
                             </li>
@@ -303,7 +303,99 @@
                                 </button>
                             </div>
                             <div class="tab-pane fade" id="feeding">
-
+                                <h5 class="font-weight-bold text-uppercase text-center">Breeding to Gestation</h5>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="card">
+                                            <div class="card-header font-weight-bold">
+                                                Duration (Day 1-30)
+                                                <button type="button" id="GDD1D30Btn" data-pig_id="{{ $pig->id }}" data-bgd1d31="{{ json_encode(\App\Models\BGD1D30::where('pig_id', $pig->id)->first()) }}" class="btn btn-link float-right">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                            </div>
+                                            <table class="table-bordered" style="width: 100%">
+                                                <thead>
+                                                <tr>
+                                                    <td class="text-center">Day</td>
+                                                    <td class="text-center">Time</td>
+                                                    <td class="text-center">Feed Amount</td>
+                                                    <td class="text-center">Feed Type</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach(\App\Models\BGD1D30::where('pig_id', $pig->id)->get() as $bgd1d30)
+                                                    <tr>
+                                                        <td class="text-center">{{ $bgd1d30->day }}</td>
+                                                        <td class="text-center">{{ \Illuminate\Support\Carbon::parse($bgd1d30->time)->format('h:i A') }}</td>
+                                                        <td class="text-center">{{ $bgd1d30->feed_amount }}</td>
+                                                        <td class="text-center">{{ $bgd1d30->feed_type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="card">
+                                            <div class="card-header font-weight-bold">
+                                                Duration (Day 31-70)
+                                                <button type="button" id="GDD31D70Btn" data-pig_id="{{ $pig->id }}" data-bgd31d70="{{ json_encode(\App\Models\BGD31D70::where('pig_id', $pig->id)->first()) }}" class="btn btn-link float-right">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                            </div>
+                                            <table class="table-bordered" style="width: 100%">
+                                                <thead>
+                                                <tr>
+                                                    <td class="text-center">Day</td>
+                                                    <td class="text-center">Time</td>
+                                                    <td class="text-center">Feed Amount</td>
+                                                    <td class="text-center">Feed Type</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach(\App\Models\BGD31D70::where('pig_id', $pig->id)->get() as $bgd31d70)
+                                                    <tr>
+                                                        <td class="text-center">{{ $bgd31d70->day }}</td>
+                                                        <td class="text-center">{{ \Illuminate\Support\Carbon::parse($bgd31d70->time)->format('h:i A') }}</td>
+                                                        <td class="text-center">{{ $bgd31d70->feed_amount }}</td>
+                                                        <td class="text-center">{{ $bgd31d70->feed_type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="card">
+                                            <div class="card-header font-weight-bold">
+                                                Duration (Day 71-100)
+                                                <button type="button" id="GDD71D100Btn" data-pig_id="{{ $pig->id }}" data-bgd71d100="{{ json_encode(\App\Models\BGD71D100::where('pig_id', $pig->id)->first()) }}" class="btn btn-link float-right">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                            </div>
+                                            <table class="table-bordered" style="width: 100%">
+                                                <thead>
+                                                <tr>
+                                                    <td class="text-center">Day</td>
+                                                    <td class="text-center">Time</td>
+                                                    <td class="text-center">Feed Amount</td>
+                                                    <td class="text-center">Feed Type</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach(\App\Models\BGD71D100::where('pig_id', $pig->id)->get() as $bgd71d100)
+                                                    <tr>
+                                                        <td class="text-center">{{ $bgd71d100->day }}</td>
+                                                        <td class="text-center">{{ \Illuminate\Support\Carbon::parse($bgd71d100->time)->format('h:i A') }}</td>
+                                                        <td class="text-center">{{ $bgd71d100->feed_amount }}</td>
+                                                        <td class="text-center">{{ $bgd71d100->feed_type }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -455,6 +547,141 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="litter_no">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="BGD1D30Modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="BGD1D30Form" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Breeding to Gestation (Day 1 - 30)
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Day</label>
+                        <select name="day" class="form-control">
+                            <option value="">-- select --</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" name="time" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Amount</label>
+                        <input type="text" name="feed_amount" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Type</label>
+                        <input type="text" name="feed_type" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="pig_id" value="{{ $pig->id }}">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="BGD31D70Modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="BGD31D70Form" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Breeding to Gestation (Day 31 - 70)
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Day</label>
+                        <select name="day" class="form-control">
+                            <option value="">-- select --</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" name="time" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Amount</label>
+                        <input type="text" name="feed_amount" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Type</label>
+                        <input type="text" name="feed_type" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="pig_id" value="{{ $pig->id }}">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="BGD71D100Modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="BGD71D100Form" class="modal-content">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Breeding to Gestation (Day 71 - 100)
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Day</label>
+                        <select name="day" class="form-control">
+                            <option value="">-- select --</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" name="time" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Amount</label>
+                        <input type="text" name="feed_amount" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Type</label>
+                        <input type="text" name="feed_type" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="pig_id" value="{{ $pig->id }}">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>

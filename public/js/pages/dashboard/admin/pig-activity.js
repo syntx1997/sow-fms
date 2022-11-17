@@ -20,6 +20,18 @@ const editWeaningModal = $('#editWeaningModal');
 const editRemarksForm = $('#editRemarksForm');
 const editRemarksSubmitBtn = editRemarksForm.find('button[type="submit"]');
 
+const BGD1D30Form = $('#BGD1D30Form');
+const BGD1D30SubmitBtn = BGD1D30Form.find('button[type="submit"]');
+const BGD1D30Modal = $('#BGD1D30Modal');
+
+const BGD31D70Form = $('#BGD31D70Form');
+const BGD31D70SubmitBtn = BGD31D70Form.find('button[type="submit"]');
+const BGD31D70Modal = $('#BGD31D70Modal');
+
+const BGD71D100Form = $('#BGD71D100Form');
+const BGD71D100SubmitBtn = BGD71D100Form.find('button[type="submit"]');
+const BGD71D100Modal = $('#BGD71D100Modal');
+
 $(function () {
     assignStaffForm.on('submit', function (e) {
         e.preventDefault();
@@ -176,6 +188,93 @@ $(function () {
             }
         });
     });
+
+    BGD1D30Form.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/breeding-to-gestation/edit/d1-d30',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (res) {
+                successAndReloadAfterSeconds(2000, res.message);
+            },
+            error: function (err) {
+                const errJSON = err.responseJSON;
+                if ((errJSON.errors)) {
+                    const errors = errJSON.errors;
+                    const Validation = new CustomValidation();
+                    $.each(errors, function (field, errMsg) {
+                        const input = formInput(BGD1D30Form, field === 'day' ? 'select' : 'input', field);
+                        Validation.validate(input, errMsg);
+                    });
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(BGD1D30SubmitBtn, 'Editing');
+            },
+            complete: function () {
+                submitBtnAfterSend(BGD1D30SubmitBtn, 'Edit');
+            }
+        });
+    });
+
+    BGD31D70Form.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/breeding-to-gestation/edit/d31-d70',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (res) {
+                successAndReloadAfterSeconds(2000, res.message);
+            },
+            error: function (err) {
+                const errJSON = err.responseJSON;
+                if ((errJSON.errors)) {
+                    const errors = errJSON.errors;
+                    const Validation = new CustomValidation();
+                    $.each(errors, function (field, errMsg) {
+                        const input = formInput(BGD31D70Form, field === 'day' ? 'select' : 'input', field);
+                        Validation.validate(input, errMsg);
+                    });
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(BGD31D70SubmitBtn, 'Editing');
+            },
+            complete: function () {
+                submitBtnAfterSend(BGD31D70SubmitBtn, 'Edit');
+            }
+        });
+    });
+
+    BGD71D100Form.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/func/breeding-to-gestation/edit/d71-d100',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (res) {
+                successAndReloadAfterSeconds(2000, res.message);
+            },
+            error: function (err) {
+                const errJSON = err.responseJSON;
+                if ((errJSON.errors)) {
+                    const errors = errJSON.errors;
+                    const Validation = new CustomValidation();
+                    $.each(errors, function (field, errMsg) {
+                        const input = formInput(BGD71D100Form, field === 'day' ? 'select' : 'input', field);
+                        Validation.validate(input, errMsg);
+                    });
+                }
+            },
+            beforeSend: function () {
+                submitBtnBeforeSend(BGD71D100SubmitBtn, 'Editing');
+            },
+            complete: function () {
+                submitBtnAfterSend(BGD71D100SubmitBtn, 'Edit');
+            }
+        });
+    });
 });
 
 $(document).on('click', '#addNewSetBtn', function () {
@@ -314,4 +413,43 @@ $(document).on('submit', '#editRemarksForm', function (e) {
             submitBtnAfterSend(submitBtn, 'Save');
         }
     });
+});
+
+$(document).on('click', '#GDD1D30Btn', function () {
+    const data = $(this).data();
+
+    if (data.bgd1d31 !== null) {
+        formInput(BGD1D30Form, 'select', 'day').val(data.bgd1d31.day);
+        formInput(BGD1D30Form, 'input', 'time').val(data.bgd1d31.time);
+        formInput(BGD1D30Form, 'input', 'feed_amount').val(data.bgd1d31.feed_amount);
+        formInput(BGD1D30Form, 'input', 'feed_type').val(data.bgd1d31.feed_type);
+    }
+
+    showModal(BGD1D30Modal);
+});
+
+$(document).on('click', '#GDD31D70Btn', function () {
+    const data = $(this).data();
+
+    if (data.bgd31d70 !== null) {
+        formInput(BGD31D70Form, 'select', 'day').val(data.bgd31d70.day);
+        formInput(BGD31D70Form, 'input', 'time').val(data.bgd31d70.time);
+        formInput(BGD31D70Form, 'input', 'feed_amount').val(data.bgd31d70.feed_amount);
+        formInput(BGD31D70Form, 'input', 'feed_type').val(data.bgd31d70.feed_type);
+    }
+
+    showModal(BGD31D70Modal);
+});
+
+$(document).on('click', '#GDD71D100Btn', function () {
+    const data = $(this).data();
+
+    if (data.bgd71d100 !== null) {
+        formInput(BGD71D100Form, 'select', 'day').val(data.bgd71d100.day);
+        formInput(BGD71D100Form, 'input', 'time').val(data.bgd71d100.time);
+        formInput(BGD71D100Form, 'input', 'feed_amount').val(data.bgd71d100.feed_amount);
+        formInput(BGD71D100Form, 'input', 'feed_type').val(data.bgd71d100.feed_type);
+    }
+
+    showModal(BGD71D100Modal);
 });
