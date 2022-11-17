@@ -37,6 +37,11 @@
                         <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
+                <li><a href="{{ url('/dashboard/staff/guide') }}" class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-381-book"></i>
+                        <span class="nav-text">Feeding/Medication Guide</span>
+                    </a>
+                </li>
             @endif
             <!-- Staff [End] -->
 

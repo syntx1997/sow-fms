@@ -12,4 +12,10 @@ class StaffDashboardController extends Controller
             'js' => asset('js/pages/staff/index.js')
         ]);
     }
+
+    public function guide() {
+        return view('pages.staff.guide', [
+            'title' => 'Feeding/Medication Guide'
+        ]);
+    }
 }

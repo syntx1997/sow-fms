@@ -100,6 +100,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     /* -- ---------- Staff ----------- -- */
     Route::middleware('staff.only')->prefix('/staff')->group(function () {
         Route::get('/index', [StaffDashboardController::class, 'index']);
+        Route::get('/guide', [StaffDashboardController::class, 'guide']);
     });
 
 });
