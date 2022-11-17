@@ -8,7 +8,7 @@
                 <strong>Feeding Guide for Piglet/Fattener</strong>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="width: 100%">
                     <thead>
                     <tr>
                         <th class="text-center">Feed Type</th>
@@ -57,6 +57,43 @@
                     <tr>
                         <td colspan="2" class="text-center">Expected to be Sold</td>
                         <td colspan="1" class="text-center">Day 114</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <strong>Medication Guide</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Medication</th>
+                        <th class="text-center">On Day</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center">First Injection of Iron</td>
+                        <td class="text-center">Day 3</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Second Injection of Iron</td>
+                        <td class="text-center" rowspan="2">Day 10</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Castration(Kapon)</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1st Deworming</td>
+                        <td class="text-center">Day 35</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2nd Deworming</td>
+                        <td class="text-center">Day 75</td>
                     </tr>
                     </tbody>
                 </table>
