@@ -117,6 +117,10 @@
                                 <label>Sire</label><br>
                                 <h4 class="text-black">{{ $pig->sire }}</h4>
                             </div>
+                            <div class="form-group">
+                                <label>Type</label><br>
+                                <h4 class="text-black">{{ $pig->type }}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
