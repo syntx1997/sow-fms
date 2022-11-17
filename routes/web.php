@@ -95,6 +95,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/user-management', [AdminDashboardController::class, 'userManagement']);
         Route::get('/pig-management', [AdminDashboardController::class, 'pigManagement']);
         Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'pigActivity']);
+        Route::get('/suppliers', [AdminDashboardController::class, 'suppliers']);
     });
 
     /* -- ---------- Staff ----------- -- */

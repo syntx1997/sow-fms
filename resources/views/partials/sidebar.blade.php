@@ -27,6 +27,11 @@
                         <span class="nav-text">User Management</span>
                     </a>
                 </li>
+                <li><a href="{{ url('/dashboard/admin/suppliers') }}" class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-381-user"></i>
+                        <span class="nav-text">Suppliers</span>
+                    </a>
+                </li>
             @endif
             <!-- Admin [End] -->
 
