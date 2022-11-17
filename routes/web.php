@@ -17,6 +17,8 @@ use App\Http\Controllers\WeaningController;
 use App\Http\Controllers\RemarkController;
 use App\Http\Controllers\BreedingToGestationController;
 
+use App\Http\Controllers\SupplierController;
+
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
 
@@ -82,6 +84,13 @@ Route::prefix('/func')->group(function () {
         Route::post('/edit/d1-d30', [BreedingToGestationController::class, 'editBGD1D30']);
         Route::post('/edit/d31-d70', [BreedingToGestationController::class, 'editBGD31D70']);
         Route::post('/edit/d71-d100', [BreedingToGestationController::class, 'editBGD71D100']);
+    });
+
+    /* -- ---------- Supplier ----------- -- */
+    Route::prefix('/supplier')->group(function () {
+        Route::post('/add', [SupplierController::class, 'add']);
+        Route::post('/edit', [SupplierController::class, 'edit']);
+        Route::post('/delete', [SupplierController::class, 'delete']);
     });
 
 });
