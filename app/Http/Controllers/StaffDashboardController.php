@@ -18,4 +18,10 @@ class StaffDashboardController extends Controller
             'title' => 'Feeding/Medication Guide'
         ]);
     }
+
+    public function pigsAssigned() {
+        return view('pages.staff.pigs-assigned', [
+            'title' => 'Pig(s) Assigned'
+        ]);
+    }
 }
