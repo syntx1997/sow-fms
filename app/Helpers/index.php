@@ -22,8 +22,8 @@ if(!function_exists('viewActivitiesBtn')) {
     function viewActivitiesBtn($btnName, $data):string {
         $imgUrl = asset('storage/' . $data['photo']);
         return <<<HERE
-            <div class="action-button text-center" id="lightgallery">
-                <a href="$imgUrl" data-exthumbimage="$imgUrl" data-src="$imgUrl">
+            <div class="action-button text-center">
+                <a class="LGImg" href="$imgUrl" data-exthumbimage="$imgUrl" data-src="$imgUrl">
                     <img src="$imgUrl" style="height: 50px">
                 </a>
                 <br>

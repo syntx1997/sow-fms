@@ -56,6 +56,15 @@ $(function () {
         }
     });
 
+    pigDataTable.on('draw.dt', function () {
+        $('.viewPhotoLightGallery').lightGallery({
+            loop:true,
+            thumbnail:true,
+            exThumbImage: 'data-exthumbimage',
+            selector: '.LGImg'
+        });
+    });
+
     addPigForm.on('submit', function (e) {
         e.preventDefault();
         $.ajax({

@@ -65,7 +65,17 @@ function showModal(modal) {
 }
 
 function reloadDataTable(table) {
-    table.DataTable().ajax.reload(null);
+    table.DataTable().ajax.reload(function() {
+        //destroy your lightgallery
+        try{ $('.viewPhotoLightGallery').lightGallery(); $('.viewPhotoLightGallery').data('lightGallery').destroy(true); }catch(ex){};
+
+        $('.viewPhotoLightGallery').lightGallery({
+            loop:true,
+            thumbnail:true,
+            exThumbImage: 'data-exthumbimage',
+            selector: '.LGImg'
+        });
+    }, null);
 }
 
 function alertMessage(message, type) {
