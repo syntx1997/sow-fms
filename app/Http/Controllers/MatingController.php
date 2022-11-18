@@ -19,14 +19,8 @@ class MatingController extends Controller
             return response(['errors' => $validator->errors()], 401);
         }
 
-        $countMating = Mating::where('litter_no', $request->litter_no)->count();
-
-        if($countMating < 3) {
-            Mating::create($request->all());
-            return response(['message' => 'New mating schedule added successfully!'], 201);
-        }
-
-        return response(['message' => 'Maximum of three(3) mating schedule exceeded!'], 401);
+        Mating::create($request->all());
+        return response(['message' => 'New mating schedule added successfully!'], 201);
     }
 
     public function edit(Request $request) {
