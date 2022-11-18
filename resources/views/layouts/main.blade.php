@@ -59,7 +59,8 @@
         ***********************************-->
         <div class="chatbox">
             <div class="chatbox-close"></div>
-            <iframe src="/chatify" title="description" style="width: 100%; height: 95%; border: 0px solid #c0c0c0"></iframe>
+            <a href="#" class="alert alert-danger">Close Messenger</a>
+            <iframe src="/chatify" title="description" style="width: 100%; height: 100%; border: 0px solid #c0c0c0"></iframe>
         </div>
         <!--**********************************
             Chat box End
