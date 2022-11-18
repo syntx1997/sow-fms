@@ -17,10 +17,16 @@
                     </a>
                 </li>
                 <li class="nav-label first">Main Menu</li>
-                <li><a href="{{ url('/dashboard/admin/pig-management') }}" class="ai-icon" aria-expanded="false">
+                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-089-piggy-bank"></i>
                         <span class="nav-text">Pig Management</span>
                     </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ url('/dashboard/admin/pig-management/sow') }}">Sow</a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/boar') }}">Boar</a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/piglet') }}">Piglet</a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/gilt') }}">Gilt</a></li>
+                    </ul>
                 </li>
                 <li><a href="{{ url('/dashboard/admin/user-management') }}" class="ai-icon" aria-expanded="false">
                         <i class="flaticon-028-user-1"></i>

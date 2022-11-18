@@ -46,7 +46,7 @@ Route::prefix('/func')->group(function () {
     /* -- ---------- Pig ----------- -- */
     Route::prefix('/pig')->group(function () {
         Route::post('/add', [PigController::class, 'add']);
-        Route::get('/get-all', [PigController::class, 'getAll']);
+        Route::get('/get-all/{type}', [PigController::class, 'getAll']);
         Route::post('/delete', [PigController::class, 'delete']);
         Route::post('/edit', [PigController::class, 'edit']);
         Route::post('/assign-staff', [AssignController::class, 'add']);
@@ -105,6 +105,13 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/pig-management', [AdminDashboardController::class, 'pigManagement']);
         Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'pigActivity']);
         Route::get('/suppliers', [AdminDashboardController::class, 'suppliers']);
+
+        Route::prefix('/pig-management')->group(function () {
+            Route::get('/sow', [AdminDashboardController::class, 'PGSow']);
+            Route::get('/boar', [AdminDashboardController::class, 'PGBoar']);
+            Route::get('/piglet', [AdminDashboardController::class, 'PGPiglet']);
+            Route::get('/gilt', [AdminDashboardController::class, 'PGGilt']);
+        });
     });
 
     /* -- ---------- Staff ----------- -- */

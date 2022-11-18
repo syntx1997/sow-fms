@@ -10,14 +10,11 @@ const pigTable = $('#pigTable');
 
 $(function () {
     const pigDataTable = pigTable.DataTable({
-        'ajax': '/func/pig/get-all',
+        'ajax': '/func/pig/get-all/'+type,
         'columns': [
             {
                 'classname': 'text-center',
                 'data': 'viewActivity',
-            },
-            {
-                'data': 'type',
             },
             {
                 'data': 'pig_no',
@@ -177,6 +174,7 @@ $(document).on('click', '#pigEditBtn', function () {
     editPigForm.find('input[name="dam"]').val(data.data.dam);
     editPigForm.find('input[name="dateProcured"]').val(data.data.date_procured);
     editPigForm.find('input[name="sire"]').val(data.data.sire);
+    editPigForm.find('#photo img').attr('src', '/storage/'+data.data.photo);
 });
 
 $(document).on('click', '#pigDeleteBtn', function () {

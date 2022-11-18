@@ -80,10 +80,10 @@ class PigController extends Controller
         return response(['message' => 'Sow updated successfully'], 201);
     }
 
-    public function getAll() {
+    public function getAll($type) {
         $data = [];
 
-        $pigs = Pig::all();
+        $pigs = Pig::where('type', $type)->get();
         foreach ($pigs as $pig) {
             $data[] = array_merge($pig->toArray(), [
                 'viewActivity' => viewActivitiesBtn('sow', $pig),
