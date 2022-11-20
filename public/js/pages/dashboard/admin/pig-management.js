@@ -117,7 +117,7 @@ $(function () {
                     const errors = errJSON.errors;
                     $.each(errors, function (field, errMessage) {
                         const Validation = new CustomValidation();
-                        const input = formInput(editPigForm, 'input', field);
+                        const input = formInput(editPigForm, field === 'breed' || field === 'sire' || field === 'dam' ? 'select' : 'input', field);
 
                         Validation.validate(input, errMessage);
                     });
@@ -168,12 +168,12 @@ $(document).on('click', '#pigEditBtn', function () {
 
     editPigForm.find('input[name="id"]').val(data.data.id);
     editPigForm.find('input[name="pigNo"]').val(data.data.pig_no);
-    editPigForm.find('input[name="breed"]').val(data.data.breed);
+    editPigForm.find('select[name="breed"]').val(data.data.breed);
     editPigForm.find('input[name="dateBorn"]').val(data.data.date_born);
     editPigForm.find('input[name="origin"]').val(data.data.origin);
-    editPigForm.find('input[name="dam"]').val(data.data.dam);
+    editPigForm.find('select[name="dam"]').val(data.data.dam);
     editPigForm.find('input[name="dateProcured"]').val(data.data.date_procured);
-    editPigForm.find('input[name="sire"]').val(data.data.sire);
+    editPigForm.find('select[name="sire"]').val(data.data.sire);
     editPigForm.find('#photo img').attr('src', '/storage/'+data.data.photo);
 });
 

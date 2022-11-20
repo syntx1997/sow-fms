@@ -48,7 +48,13 @@
                     <div class="form-group row">
                         <label class="col-3">Breed</label>
                         <div class="col-9">
-                            <input type="text" name="breed" class="form-control">
+                            <select name="breed" class="form-control">
+                                <option value="Duroc">Duroc</option>
+                                <option value="Landrace">Landrace</option>
+                                <option value="Large White">Large White</option>
+                                <option value="Native">Native</option>
+                                <option value="Petrain">Petrain</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -66,7 +72,12 @@
                     <div class="form-group row">
                         <label class="col-3">DAM</label>
                         <div class="col-9">
-                            <input type="text" name="dam" class="form-control">
+                            <select name="dam" class="form-control">
+                                @foreach(\App\Models\Pig::where('type', 'Sow')->get() as $pig)
+                                    <option value="{{ $pig->pig_no }}">{{ $pig->pig_no }}</option>
+                                @endforeach
+                                <option value="none">none</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -78,7 +89,12 @@
                     <div class="form-group row">
                         <label class="col-3">Sire</label>
                         <div class="col-9">
-                            <input type="text" name="sire" class="form-control">
+                            <select name="sire" class="form-control">
+                                @foreach(\App\Models\Pig::where('type', 'Boar')->get() as $pig)
+                                    <option value="{{ $pig->pig_no }}">{{ $pig->pig_no }}</option>
+                                @endforeach
+                                <option value="none">none</option>
+                            </select>
                         </div>
                     </div>
                     <hr>
@@ -126,7 +142,13 @@
                     <div class="form-group row">
                         <label class="col-3">Breed</label>
                         <div class="col-9">
-                            <input type="text" name="breed" class="form-control">
+                            <select name="breed" class="form-control">
+                                <option value="Duroc">Duroc</option>
+                                <option value="Landrace">Landrace</option>
+                                <option value="Large White">Large White</option>
+                                <option value="Native">Native</option>
+                                <option value="Petrain">Petrain</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -144,7 +166,12 @@
                     <div class="form-group row">
                         <label class="col-3">DAM</label>
                         <div class="col-9">
-                            <input type="text" name="dam" class="form-control">
+                            <select name="dam" class="form-control">
+                                @foreach(\App\Models\Pig::where('type', 'Sow')->get() as $pig)
+                                    <option value="{{ $pig->pig_no }}">{{ $pig->pig_no }}</option>
+                                @endforeach
+                                <option value="none">none</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -156,7 +183,12 @@
                     <div class="form-group row">
                         <label class="col-3">Sire</label>
                         <div class="col-9">
-                            <input type="text" name="sire" class="form-control">
+                            <select name="sire" class="form-control">
+                                @foreach(\App\Models\Pig::where('type', 'Boar')->get() as $pig)
+                                    <option value="{{ $pig->pig_no }}">{{ $pig->pig_no }}</option>
+                                @endforeach
+                                <option value="none">none</option>
+                            </select>
                         </div>
                     </div>
                     <hr>

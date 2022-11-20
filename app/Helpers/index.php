@@ -12,6 +12,9 @@ if(!function_exists('editDeleteBtn')) {
                 <button id="{$btnName}DeleteBtn" data-data="$dataAttr" class="ml-2 btn btn-xs px-2 light btn-danger">
                     <i class="flaticon-132-trash-1"></i>
                 </button>
+                <button href="/dashboard/admin/view-activity/{$data['id']}" id="{$btnName}ViewActivityBtn" class="ml-2 btn btn-xs px-2 light btn-success">
+                    <i class="flaticon-057-eye"></i> View Schedules
+                </button>
             </div>
         HERE;
     }
@@ -27,9 +30,7 @@ if(!function_exists('viewActivitiesBtn')) {
                     <img src="$imgUrl" style="height: 50px">
                 </a>
                 <br>
-                <a href="/dashboard/admin/view-activity/{$data['id']}" id="{$btnName}ViewActivityBtn" class="btn btn-link btn-xs light px-2" title="View Activity Schedules">
-                    <i class="flaticon-057-eye"></i>
-                </a>
+
             </div>
         HERE;
     }
