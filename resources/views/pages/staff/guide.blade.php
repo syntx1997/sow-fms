@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="text-center">Expected to be Sold</td>
-                        <td colspan="1" class="text-center">Day 114</td>
+                        <td colspan="1" class="text-center">Day 144</td>
                     </tr>
                     </tbody>
                 </table>
