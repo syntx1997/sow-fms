@@ -131,278 +131,321 @@
                     <!-- Nav tabs -->
                     <div class="custom-tab-1">
                         <ul class="nav nav-tabs mb-5">
+                            @if($pig->type == 'Sow')
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#breeding">Breeding</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#breeding">Breeding</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#feeding">Feeding</a>
+                                <a class="nav-link {{ $pig->type != 'Sow' ? 'active' : '' }}" data-toggle="tab" href="#feeding">Feeding</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="breeding" role="tabpanel">
-                                @if(! \App\Models\Litter::where('pig_id', $pig->id)->first())
-                                    <p>no schedules yet</p>
-                                @else
-                                    <div id="accordion-one" class="accordion accordion-primary">
-                                        @foreach(\App\Models\Litter::where('pig_id', $pig->id)->get() as $index => $litter)
-                                            <div class="accordion__item">
-                                                <div class="accordion__header {{ $index !== 0 ? 'collapsed' : '' }} rounded-lg" data-toggle="collapse" data-target="#{{ $litter->litter_no }}">
-                                                    <span class="accordion__header--text font-weight-bold">#{{ $litter->litter_no }}</span>
-                                                    <span class="accordion__header--indicator"></span>
-                                                </div>
-                                                <div id="{{ $litter->litter_no }}" class="collapse accordion__body {{ $index == 0 ? 'show' : '' }}" data-parent="#accordion-one">
-                                                    <div class="accordion__body--text">
-                                                        <div class="row mb-3">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <span class="badge badge-rounded badge-danger">Days after Mated: <span class="font-weight-bold">0</span></span>
-                                                                <span class="badge badge-rounded badge-danger">Days after Farrowed: <span class="font-weight-bold">0</span></span>
+                            @if($pig->type == 'Sow')
+                                <div class="tab-pane fade show active" id="breeding" role="tabpanel">
+                                    @if(! \App\Models\Litter::where('pig_id', $pig->id)->first())
+                                        <p>no schedules yet</p>
+                                    @else
+                                        <div id="accordion-one" class="accordion accordion-primary">
+                                            @foreach(\App\Models\Litter::where('pig_id', $pig->id)->get() as $index => $litter)
+                                                <div class="accordion__item">
+                                                    <div class="accordion__header {{ $index !== 0 ? 'collapsed' : '' }} rounded-lg" data-toggle="collapse" data-target="#{{ $litter->litter_no }}">
+                                                        <span class="accordion__header--text font-weight-bold">#{{ $litter->litter_no }}</span>
+                                                        <span class="accordion__header--indicator"></span>
+                                                    </div>
+                                                    <div id="{{ $litter->litter_no }}" class="collapse accordion__body {{ $index == 0 ? 'show' : '' }}" data-parent="#accordion-one">
+                                                        <div class="accordion__body--text">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <span class="badge badge-rounded badge-danger">Days after Mated: <span class="font-weight-bold">0</span></span>
+                                                                    <span class="badge badge-rounded badge-danger">Days after Farrowed: <span class="font-weight-bold">0</span></span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <div id="DZ_W_TimeLine111" class="widget-timeline style-1">
-                                                                    <ul class="timeline">
-                                                                        <li>
-                                                                            <div class="timeline-badge primary"></div>
-                                                                            <div class="timeline-panel text-muted">
-                                                                                <h6 class="mb-0">Mating</h6>
-                                                                                @if(! \App\Models\Mating::where('litter_no', $litter->litter_no)->first())
-                                                                                    <p class="text-muted">no schedule yet</p>
-                                                                                @else
-                                                                                    @foreach(\App\Models\Mating::where('litter_no', $litter->litter_no)->get() as $mating)
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <div id="DZ_W_TimeLine111" class="widget-timeline style-1">
+                                                                        <ul class="timeline">
+                                                                            <li>
+                                                                                <div class="timeline-badge primary"></div>
+                                                                                <div class="timeline-panel text-muted">
+                                                                                    <h6 class="mb-0">Mating</h6>
+                                                                                    @if(! \App\Models\Mating::where('litter_no', $litter->litter_no)->first())
+                                                                                        <p class="text-muted">no schedule yet</p>
+                                                                                    @else
+                                                                                        @foreach(\App\Models\Mating::where('litter_no', $litter->litter_no)->get() as $mating)
+                                                                                            <table>
+                                                                                                <tr>
+                                                                                                    <td class="text-center p-2">•</td>
+                                                                                                    <td class="text-center p-2">{{ $mating->date }}</td>
+                                                                                                    <td class="text-center p-2 align-middle font-weight-bold">{{ $mating->boar }}</td>
+                                                                                                    <td class="text-center p-2 align-middle">
+                                                                                                        <a href="#" id="editMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
+                                                                                                            <i class="fa fa-edit"></i>
+                                                                                                        </a>
+                                                                                                        <a href="#" id="deleteMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
+                                                                                                            <i class="fa fa-trash"></i>
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </table>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                    <button type="button" id="addMatingBtn" data-litter_no="{{ $litter->litter_no }}" class="btn btn-link btn-sm">
+                                                                                        <i class="fa fa-plus"></i> Add New Schedule
+                                                                                    </button>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="timeline-badge info">
+                                                                                </div>
+                                                                                <div class="timeline-panel text-muted">
+                                                                                    <h6 class="mb-0">Farrowing</strong></h6>
+                                                                                    @foreach(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->get() as $farrowing)
                                                                                         <table>
                                                                                             <tr>
-                                                                                                <td class="text-center p-2">•</td>
-                                                                                                <td class="text-center p-2">{{ $mating->date }}</td>
-                                                                                                <td class="text-center p-2 align-middle font-weight-bold">{{ $mating->boar }}</td>
-                                                                                                <td class="text-center p-2 align-middle">
-                                                                                                    <a href="#" id="editMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
-                                                                                                        <i class="fa fa-edit"></i>
-                                                                                                    </a>
-                                                                                                    <a href="#" id="deleteMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
-                                                                                                        <i class="fa fa-trash"></i>
-                                                                                                    </a>
-                                                                                                </td>
+                                                                                                <td class="p-2 font-weight-bold">ACTUAL DATE</td>
+                                                                                                <td class="p-2">{{ $farrowing->actual_date }}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">STATUS</td>
+                                                                                                <td class="p-2">{{ $farrowing->status }}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">AVE. WEIGHT</td>
+                                                                                                <td class="p-2">{{ $farrowing->weight }}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">FOSTER MI -/+</td>
+                                                                                                <td class="p-2">{{ $farrowing->dead }} / {{ $farrowing->alive }}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">FROM/TO SOW</td>
+                                                                                                <td class="p-2">{{ $farrowing->sow }}</td>
                                                                                             </tr>
                                                                                         </table>
                                                                                     @endforeach
-                                                                                @endif
-                                                                                <button type="button" id="addMatingBtn" data-litter_no="{{ $litter->litter_no }}" class="btn btn-link btn-sm">
-                                                                                    <i class="fa fa-plus"></i> Add New Schedule
-                                                                                </button>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="timeline-badge info">
-                                                                            </div>
-                                                                            <div class="timeline-panel text-muted">
-                                                                                <h6 class="mb-0">Farrowing</strong></h6>
-                                                                                @foreach(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->get() as $farrowing)
-                                                                                    <table>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">ACTUAL DATE</td>
-                                                                                            <td class="p-2">{{ $farrowing->actual_date }}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">STATUS</td>
-                                                                                            <td class="p-2">{{ $farrowing->status }}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">AVE. WEIGHT</td>
-                                                                                            <td class="p-2">{{ $farrowing->weight }}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">FOSTER MI -/+</td>
-                                                                                            <td class="p-2">{{ $farrowing->dead }} / {{ $farrowing->alive }}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">FROM/TO SOW</td>
-                                                                                            <td class="p-2">{{ $farrowing->sow }}</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                @endforeach
-                                                                                @if(! \App\Models\Farrowing::where('litter_no', $litter->litter_no)->first())
-                                                                                    <p class="text-muted">no schedule yet</p>
-                                                                                @endif
-                                                                                <button type="button" id="editFarrowingBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-farrowing="{{ json_encode(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->first()) }}">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                </button>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="timeline-badge danger">
-                                                                            </div>
-                                                                            <div class="timeline-panel text-muted">
-                                                                                <h6 class="mb-0">Weaning</h6>
-                                                                                @foreach(\App\Models\Weaning::where('litter_no', $litter->litter_no)->get() as $weaning)
-                                                                                    <table>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">DATE</td>
-                                                                                            <td class="p-2">{{ $weaning->date }}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">NO.</td>
-                                                                                            <td class="p-2">{{ $weaning->number }}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td class="p-2 font-weight-bold">AVE. WEIGHT</td>
-                                                                                            <td class="p-2">{{ $weaning->weight }}</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                @endforeach
-                                                                                @if(! \App\Models\Weaning::where('litter_no', $litter->litter_no)->first())
-                                                                                    <p class="text-muted">no schedule yet</p>
-                                                                                @endif
-                                                                                <button type="button" id="editWeaningBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-weaning="{{ json_encode(\App\Models\Weaning::where('litter_no', $litter->litter_no)->first()) }}">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                </button>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="timeline-badge success">
-                                                                            </div>
-                                                                            <div class="timeline-panel text-muted" href="#">
-                                                                                <h6 class="mb-0">Remarks</h6>
-                                                                                @if(\App\Models\Remark::where('litter_no', $litter->litter_no)->count() == 0)
-                                                                                    <div class="form-group">
-                                                                                        <form id="editRemarksForm">
-                                                                                            @csrf
-                                                                                            <textarea name="remarks" class="form-control"></textarea>
-                                                                                            <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
-                                                                                            <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                @else
-                                                                                    @php
-                                                                                        $remarks = \App\Models\Remark::where('litter_no', $litter->litter_no)->first();
-                                                                                    @endphp
-                                                                                    {{ $remarks->remarks }} <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#editRemarks{{ $litter->litter_no }}"><i class="fa fa-edit"></i></button>
-                                                                                    <div class="collapse" id="editRemarks{{ $litter->litter_no }}">
+                                                                                    @if(! \App\Models\Farrowing::where('litter_no', $litter->litter_no)->first())
+                                                                                        <p class="text-muted">no schedule yet</p>
+                                                                                    @endif
+                                                                                    <button type="button" id="editFarrowingBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-farrowing="{{ json_encode(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->first()) }}">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="timeline-badge danger">
+                                                                                </div>
+                                                                                <div class="timeline-panel text-muted">
+                                                                                    <h6 class="mb-0">Weaning</h6>
+                                                                                    @foreach(\App\Models\Weaning::where('litter_no', $litter->litter_no)->get() as $weaning)
+                                                                                        <table>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">DATE</td>
+                                                                                                <td class="p-2">{{ $weaning->date }}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">NO.</td>
+                                                                                                <td class="p-2">{{ $weaning->number }}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="p-2 font-weight-bold">AVE. WEIGHT</td>
+                                                                                                <td class="p-2">{{ $weaning->weight }}</td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    @endforeach
+                                                                                    @if(! \App\Models\Weaning::where('litter_no', $litter->litter_no)->first())
+                                                                                        <p class="text-muted">no schedule yet</p>
+                                                                                    @endif
+                                                                                    <button type="button" id="editWeaningBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-weaning="{{ json_encode(\App\Models\Weaning::where('litter_no', $litter->litter_no)->first()) }}">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="timeline-badge success">
+                                                                                </div>
+                                                                                <div class="timeline-panel text-muted" href="#">
+                                                                                    <h6 class="mb-0">Remarks</h6>
+                                                                                    @if(\App\Models\Remark::where('litter_no', $litter->litter_no)->count() == 0)
                                                                                         <div class="form-group">
                                                                                             <form id="editRemarksForm">
                                                                                                 @csrf
-                                                                                                <textarea name="remarks" class="form-control">{{ $remarks->remarks }}</textarea>
+                                                                                                <textarea name="remarks" class="form-control"></textarea>
                                                                                                 <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
                                                                                                 <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
                                                                                             </form>
                                                                                         </div>
-                                                                                    </div>
-                                                                                @endif
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
+                                                                                    @else
+                                                                                        @php
+                                                                                            $remarks = \App\Models\Remark::where('litter_no', $litter->litter_no)->first();
+                                                                                        @endphp
+                                                                                        {{ $remarks->remarks }} <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#editRemarks{{ $litter->litter_no }}"><i class="fa fa-edit"></i></button>
+                                                                                        <div class="collapse" id="editRemarks{{ $litter->litter_no }}">
+                                                                                            <div class="form-group">
+                                                                                                <form id="editRemarksForm">
+                                                                                                    @csrf
+                                                                                                    <textarea name="remarks" class="form-control">{{ $remarks->remarks }}</textarea>
+                                                                                                    <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
+                                                                                                    <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endif
-                                <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
-                                    <i class="fa fa-plus"></i> Add New Set
-                                </button>
-                            </div>
-                            <div class="tab-pane fade" id="feeding">
-                                <h5 class="font-weight-bold text-uppercase text-center">Breeding to Gestation</h5>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-4 col-lg-4">
-                                        <div class="card">
-                                            <div class="card-header font-weight-bold">
-                                                Duration (Day 1-30)
-                                                <button type="button" id="GDD1D30Btn" data-pig_id="{{ $pig->id }}" data-bgd1d31="{{ json_encode(\App\Models\BGD1D30::where('pig_id', $pig->id)->first()) }}" class="btn btn-link float-right">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                            </div>
-                                            <table class="table-bordered" style="width: 100%">
-                                                <thead>
-                                                <tr>
-                                                    <td class="text-center">Day</td>
-                                                    <td class="text-center">Time</td>
-                                                    <td class="text-center">Feed Amount</td>
-                                                    <td class="text-center">Feed Type</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\BGD1D30::where('pig_id', $pig->id)->get() as $bgd1d30)
-                                                    <tr>
-                                                        <td class="text-center">{{ $bgd1d30->day }}</td>
-                                                        <td class="text-center">{{ \Illuminate\Support\Carbon::parse($bgd1d30->time)->format('h:i A') }}</td>
-                                                        <td class="text-center">{{ $bgd1d30->feed_amount }}</td>
-                                                        <td class="text-center">{{ $bgd1d30->feed_type }}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                                            @endforeach
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 col-lg-4">
-                                        <div class="card">
-                                            <div class="card-header font-weight-bold">
-                                                Duration (Day 31-70)
-                                                <button type="button" id="GDD31D70Btn" data-pig_id="{{ $pig->id }}" data-bgd31d70="{{ json_encode(\App\Models\BGD31D70::where('pig_id', $pig->id)->first()) }}" class="btn btn-link float-right">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                            </div>
-                                            <table class="table-bordered" style="width: 100%">
-                                                <thead>
-                                                <tr>
-                                                    <td class="text-center">Day</td>
-                                                    <td class="text-center">Time</td>
-                                                    <td class="text-center">Feed Amount</td>
-                                                    <td class="text-center">Feed Type</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\BGD31D70::where('pig_id', $pig->id)->get() as $bgd31d70)
-                                                    <tr>
-                                                        <td class="text-center">{{ $bgd31d70->day }}</td>
-                                                        <td class="text-center">{{ \Illuminate\Support\Carbon::parse($bgd31d70->time)->format('h:i A') }}</td>
-                                                        <td class="text-center">{{ $bgd31d70->feed_amount }}</td>
-                                                        <td class="text-center">{{ $bgd31d70->feed_type }}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-4 col-lg-4">
-                                        <div class="card">
-                                            <div class="card-header font-weight-bold">
-                                                Duration (Day 71-100)
-                                                <button type="button" id="GDD71D100Btn" data-pig_id="{{ $pig->id }}" data-bgd71d100="{{ json_encode(\App\Models\BGD71D100::where('pig_id', $pig->id)->first()) }}" class="btn btn-link float-right">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                            </div>
-                                            <table class="table-bordered" style="width: 100%">
-                                                <thead>
-                                                <tr>
-                                                    <td class="text-center">Day</td>
-                                                    <td class="text-center">Time</td>
-                                                    <td class="text-center">Feed Amount</td>
-                                                    <td class="text-center">Feed Type</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach(\App\Models\BGD71D100::where('pig_id', $pig->id)->get() as $bgd71d100)
-                                                    <tr>
-                                                        <td class="text-center">{{ $bgd71d100->day }}</td>
-                                                        <td class="text-center">{{ \Illuminate\Support\Carbon::parse($bgd71d100->time)->format('h:i A') }}</td>
-                                                        <td class="text-center">{{ $bgd71d100->feed_amount }}</td>
-                                                        <td class="text-center">{{ $bgd71d100->feed_type }}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    @endif
+                                    <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
+                                        <i class="fa fa-plus"></i> Add New Set
+                                    </button>
                                 </div>
+                            @endif
+                            <div class="tab-pane fade {{ $pig->type != 'Sow' ? 'show active' : '' }}" id="feeding">
+                                @if($pig->type == 'Sow')
+                                    <table class="table table-bordered" style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" rowspan="1" colspan="1">Stage</th>
+                                            <th class="text-center" rowspan="1" colspan="3">Breeding to Gestation</th>
+                                            <th class="text-center" rowspan="1" colspan="4">Gestation to Weaning</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center" rowspan="1" colspan="1">Duration</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 1-30</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 31-70</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 71-100</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 100 - Farrowing</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 1 After Farrow</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 2 - 4</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Day 4 - 28</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" rowspan="1" colspan="1">Feed Type</td>
+                                            <td class="text-center" rowspan="1" colspan="3">Breeder</td>
+                                            <td class="text-center" rowspan="1" colspan="4">Lactating</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" rowspan="1" colspan="1">Feed Amount</td>
+                                            <td class="text-center" rowspan="1" colspan="1">1.5kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">3.0-3.5kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">2.5-3.0kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">3.0-3.5kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">1.0-1.5kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">2.0-2.5kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">5-6kgs</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                @elseif($pig->type == 'Gilt')
+                                    <table class="table table-bordered" style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" rowspan="1" colspan="1">Stage</th>
+                                            <th class="text-center" rowspan="1" colspan="2">Growing to Breeding</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center" rowspan="1" colspan="1">Duration</td>
+                                            <td class="text-center" rowspan="1" colspan="1">124-153</td>
+                                            <td class="text-center" rowspan="1" colspan="1">154 - Heat Day</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" rowspan="1" colspan="1">Feed Tyoe</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Grower</td>
+                                            <td class="text-center" rowspan="1" colspan="1">Breeder</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" rowspan="1" colspan="1">Feed Amount</td>
+                                            <td class="text-center" rowspan="1" colspan="1">2.0kgs</td>
+                                            <td class="text-center" rowspan="1" colspan="1">2.0kgs</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    @elseif($pig->type == 'Boar')
+                                        <table class="table table-bordered" style="width: 100%">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center" class="text-center" rowspan="1" colspan="1">Stage</th>
+                                                <th class="text-center" class="text-center" rowspan="1" colspan="2">Growing to Breeding</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Duration</td>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">124-153</td>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">154-Onwards</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Feed Type</td>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Grower</td>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Breeder</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Feed Amount</td>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">2.0kgs</td>
+                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">1.5-2.0kgs</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                @elseif($pig->type == 'Piglet')
+                                    <table class="table-bordered" style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" colspan="1" rowspan="1">Feed Type</th>
+                                            <th class="text-center" colspan="4" rowspan="1">Booster</th>
+                                            <th class="text-center" colspan="1" rowspan="1">Hog Prestart</th>
+                                            <th class="text-center" colspan="1" rowspan="1">Starter</th>
+                                            <th class="text-center" colspan="1" rowspan="1">Grower</th>
+                                            <th class="text-center" colspan="1" rowspan="1">Finisher</th>
+                                            <th class="text-center" colspan="1" rowspan="1">Expected Date to be Sold</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center" colspan="1" rowspan="1">Duration</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 7</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 15</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 22</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 29</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 29</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 36</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 46</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 81</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 124</td>
+                                            <td class="text-center" colspan="1" rowspan="1">Day 144</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="1" rowspan="1">Feed Amount</td>
+                                            <td class="text-center" colspan="1" rowspan="1">20g</td>
+                                            <td class="text-center" colspan="1" rowspan="1">50g</td>
+                                            <td class="text-center" colspan="1" rowspan="1">100g</td>
+                                            <td class="text-center" colspan="1" rowspan="1">300g</td>
+                                            <td class="text-center" colspan="1" rowspan="1">600g</td>
+                                            <td class="text-center" colspan="1" rowspan="1">1kg</td>
+                                            <td class="text-center" colspan="1" rowspan="1">2kg</td>
+                                            <td class="text-center" colspan="1" rowspan="1">2.2</td>
+                                            <td class="text-center" colspan="1" rowspan="1"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         @endif
 
     </div>
