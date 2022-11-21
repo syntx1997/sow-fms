@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assign;
 use Illuminate\Http\Request;
 use App\Models\Pig;
 use Illuminate\Support\Facades\Validator;
@@ -92,6 +93,18 @@ class PigController extends Controller
         }
 
         return response(['data' => $data], 201);
+    }
+
+    public function staffAssigned($staffId) {
+        $data = [];
+
+        $assigns = Assign::where('user_id', $staffId)->get();
+        foreach ($assigns as $assign) {
+            $pig = Pig::where('pig_id', $assign->pig_id)->first();
+            $data = array_merge($pig->toArray());
+        }
+
+        return response(['data' => $data]);
     }
 
     public function delete(Request $request) {
