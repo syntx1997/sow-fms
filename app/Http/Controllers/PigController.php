@@ -100,11 +100,22 @@ class PigController extends Controller
 
         $assigns = Assign::where('user_id', $staffId)->get();
         foreach ($assigns as $assign) {
-            $pig = Pig::where('pig_id', $assign->pig_id)->first();
-            $data = array_merge($pig->toArray());
+            $pig = Pig::where('id', $assign->pig_id)->first();
+
+            $actions = <<<HERE
+                <a href="/dashboard/admin/view-activity/$pig->id" class="ml-2 btn btn-xs px-2 light btn-success">
+                    <i class="flaticon-057-eye"></i> View Schedules
+                </a>
+            HERE;
+
+
+            $data[] = array_merge($pig->toArray(), [
+                'actions' => $actions,
+                'viewActivity' => viewActivitiesBtn('sow', $pig),
+            ]);
         }
 
-        return response(['data' => $data]);
+        return response(['data' => $data], 201);
     }
 
     public function delete(Request $request) {

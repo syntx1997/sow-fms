@@ -21,7 +21,8 @@ class StaffDashboardController extends Controller
 
     public function pigsAssigned() {
         return view('pages.staff.pigs-assigned', [
-            'title' => 'Pig(s) Assigned'
+            'title' => 'Pig(s) Assigned',
+            'js' => asset('js/pages/dashboard/staff/pigs-assigned.js')
         ]);
     }
 }

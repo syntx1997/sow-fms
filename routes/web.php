@@ -50,6 +50,7 @@ Route::prefix('/func')->group(function () {
         Route::post('/delete', [PigController::class, 'delete']);
         Route::post('/edit', [PigController::class, 'edit']);
         Route::post('/assign-staff', [AssignController::class, 'add']);
+        Route::get('/staff-assigned/get-all/{staffId}', [PigController::class, 'staffAssigned']);
     });
 
     /* -- ---------- Litter ----------- -- */
