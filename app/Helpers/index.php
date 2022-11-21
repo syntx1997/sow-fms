@@ -4,6 +4,18 @@
 if(!function_exists('editDeleteBtn')) {
     function editDeleteBtn($btnName, $data):string {
         $dataAttr = htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8');
+
+        if (isset($data->type))
+        {
+            $viewSchedules = <<< HERE
+                <a href="/dashboard/admin/view-activity/{$data['id']}" id="{$btnName}ViewActivityBtn" class="ml-2 btn btn-xs px-2 light btn-success">
+                    <i class="flaticon-057-eye"></i> View Schedules
+                </a>
+            HERE;
+        } else {
+            $viewSchedules = '';
+        }
+
         return <<<HERE
             <div class="d-flex action-button">
                 <button id="{$btnName}EditBtn" data-data="$dataAttr" class="btn btn-info btn-xs light px-2">
@@ -12,9 +24,7 @@ if(!function_exists('editDeleteBtn')) {
                 <button id="{$btnName}DeleteBtn" data-data="$dataAttr" class="ml-2 btn btn-xs px-2 light btn-danger">
                     <i class="flaticon-132-trash-1"></i>
                 </button>
-                <a href="/dashboard/admin/view-activity/{$data['id']}" id="{$btnName}ViewActivityBtn" class="ml-2 btn btn-xs px-2 light btn-success">
-                    <i class="flaticon-057-eye"></i> View Schedules
-                </a>
+                $viewSchedules
             </div>
         HERE;
     }
