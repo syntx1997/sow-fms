@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header d-sm-flex d-block">
                 <div class="mr-auto mb-sm-0 mb-3">
-                    <h4 class="card-title mb-2">Pig Management</h4>
+{{--                    <h4 class="card-title mb-2">Pig Management</h4>--}}
                     <span>Boar List</span>
                 </div>
                 <button class="btn btn-info" data-toggle="modal" data-target="#addPigModal"><i class="fa fa-plus"></i> Add Boar</button>

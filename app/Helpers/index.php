@@ -17,7 +17,7 @@ if(!function_exists('editDeleteBtn')) {
         }
 
         return <<<HERE
-            <div class="d-flex action-button">
+            <div class="text-center action-button">
                 <button id="{$btnName}EditBtn" data-data="$dataAttr" class="btn btn-info btn-xs light px-2">
                     <i class="flaticon-162-edit"></i>
                 </button>
@@ -39,8 +39,6 @@ if(!function_exists('viewActivitiesBtn')) {
                 <a class="LGImg" href="$imgUrl" data-exthumbimage="$imgUrl" data-src="$imgUrl">
                     <img src="$imgUrl" style="height: 50px">
                 </a>
-                <br>
-
             </div>
         HERE;
     }

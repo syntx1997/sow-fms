@@ -54,77 +54,6 @@
                 </div>
             </div>
         @else
-            <div class="profile card card-body px-3 pt-3 pb-0">
-                <p>
-                    <strong class="text-danger">Assigned to:</strong>
-                </p>
-                <div class="profile-head">
-                    <div class="photo-content">
-                        <div class="cover-photo"></div>
-                    </div>
-                    <div class="profile-info">
-                        <div class="profile-photo">
-                            <img src="{{ asset('storage/users-avatar/' . auth()->user()->avatar) }}" class="img-fluid rounded-circle" alt="">
-                        </div>
-                        <div class="profile-details">
-                            <div class="profile-name px-3 pt-2">
-                                <h4 class="text-primary mb-0">{{ $staff->name }}</h4>
-                                <p>Staff</p>
-                            </div>
-                            <div class="profile-email px-2 pt-2">
-                                <p>{{ $staff->email }} / {{ $staff->phone }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <label>Pig No.</label><br>
-                                <h4 class="text-black">{{ $pig->pig_no }}</h4>
-                            </div>
-                            <div class="form-group">
-                                <label>Breed</label><br>
-                                <h4 class="text-black">{{ $pig->breed }}</h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <label>Date Born</label><br>
-                                <h4 class="text-black">{{ $pig->date_born }}</h4>
-                            </div>
-                            <div class="form-group">
-                                <label>Origin</label><br>
-                                <h4 class="text-black">{{ $pig->origin }}</h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <label>DAM</label><br>
-                                <h4 class="text-black">{{ $pig->dam }}</h4>
-                            </div>
-                            <div class="form-group">
-                                <label>Date Procured</label><br>
-                                <h4 class="text-black">{{ $pig->date_procured }}</h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3">
-                            <div class="form-group">
-                                <label>Sire</label><br>
-                                <h4 class="text-black">{{ $pig->sire }}</h4>
-                            </div>
-                            <div class="form-group">
-                                <label>Type</label><br>
-                                <h4 class="text-black">{{ $pig->type }}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="card">
                 <div class="card-body">
@@ -313,36 +242,44 @@
                                     <table class="table table-bordered" style="width: 100%">
                                         <thead>
                                         <tr>
-                                            <th class="text-center" rowspan="1" colspan="1">Stage</th>
-                                            <th class="text-center" rowspan="1" colspan="3">Breeding to Gestation</th>
-                                            <th class="text-center" rowspan="1" colspan="4">Gestation to Weaning</th>
+                                            <th>Stage</th>
+                                            <th>Duration</th>
+                                            <th>Feed Type</th>
+                                            <th>Feed Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center" rowspan="1" colspan="1">Duration</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 1-30</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 31-70</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 71-100</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 100 - Farrowing</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 1 After Farrow</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 2 - 4</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Day 4 - 28</td>
+                                            <td rowspan="3">Breeding to Gestation</td>
+                                            <td>Day 1-30</td>
+                                            <td rowspan="3">Breeder</td>
+                                            <td>1.5 kgs</td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" rowspan="1" colspan="1">Feed Type</td>
-                                            <td class="text-center" rowspan="1" colspan="3">Breeder</td>
-                                            <td class="text-center" rowspan="1" colspan="4">Lactating</td>
+                                            <td>Day 31-70</td>
+                                            <td>Day 3.0-3.5 kgs</td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" rowspan="1" colspan="1">Feed Amount</td>
-                                            <td class="text-center" rowspan="1" colspan="1">1.5kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">3.0-3.5kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">2.5-3.0kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">3.0-3.5kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">1.0-1.5kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">2.0-2.5kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">5-6kgs</td>
+                                            <td>Day 31-100</td>
+                                            <td>2.5-3.0 kgs kgs</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="4">Gestation to Weaning</td>
+                                            <td>Day 100 - Farrowing</td>
+                                            <td rowspan="4">Lactating</td>
+                                            <td>3.0 - 3.5 kgs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day 1 After Farrowing</td>
+                                            <td>1.0-1.5 kgs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day 2-4</td>
+                                            <td>2.0-2.5 kgs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day 4-28</td>
+                                            <td>5-6 kgs</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -350,25 +287,23 @@
                                     <table class="table table-bordered" style="width: 100%">
                                         <thead>
                                         <tr>
-                                            <th class="text-center" rowspan="1" colspan="1">Stage</th>
-                                            <th class="text-center" rowspan="1" colspan="2">Growing to Breeding</th>
+                                            <th>Stage</th>
+                                            <th>Duration</th>
+                                            <th>Feed Type</th>
+                                            <th>Feed Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center" rowspan="1" colspan="1">Duration</td>
-                                            <td class="text-center" rowspan="1" colspan="1">124-153</td>
-                                            <td class="text-center" rowspan="1" colspan="1">154 - Heat Day</td>
+                                            <td rowspan="2">Growing to Breeding</td>
+                                            <td>Day 124-153</td>
+                                            <td>Grower</td>
+                                            <td>2.0 kgs</td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" rowspan="1" colspan="1">Feed Tyoe</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Grower</td>
-                                            <td class="text-center" rowspan="1" colspan="1">Breeder</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" rowspan="1" colspan="1">Feed Amount</td>
-                                            <td class="text-center" rowspan="1" colspan="1">2.0kgs</td>
-                                            <td class="text-center" rowspan="1" colspan="1">2.0kgs</td>
+                                            <td>154-Heat Day</td>
+                                            <td>Breeder</td>
+                                            <td>2.0 kgs</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -376,70 +311,153 @@
                                         <table class="table table-bordered" style="width: 100%">
                                             <thead>
                                             <tr>
-                                                <th class="text-center" class="text-center" rowspan="1" colspan="1">Stage</th>
-                                                <th class="text-center" class="text-center" rowspan="1" colspan="2">Growing to Breeding</th>
+                                                <th>Stage</th>
+                                                <th>Duration</th>
+                                                <th>Feed Type</th>
+                                                <th>Feed Amount</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Duration</td>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">124-153</td>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">154-Onwards</td>
+                                                <td rowspan="2">Growing to Breeding</td>
+                                                <td>Day 124-153</td>
+                                                <td>Grower</td>
+                                                <td>2.0 kgs</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Feed Type</td>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Grower</td>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Breeder</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">Feed Amount</td>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">2.0kgs</td>
-                                                <td class="text-center" class="text-center" rowspan="1" colspan="1">1.5-2.0kgs</td>
+                                                <td>154-Onwards</td>
+                                                <td>Breeder</td>
+                                                <td>1.5 kgs</td>
                                             </tr>
                                             </tbody>
                                         </table>
                                 @elseif($pig->type == 'Piglet')
-                                    <table class="table-bordered" style="width: 100%">
+                                    <table class="table table-bordered" style="width: 100%">
                                         <thead>
                                         <tr>
-                                            <th class="text-center" colspan="1" rowspan="1">Feed Type</th>
-                                            <th class="text-center" colspan="4" rowspan="1">Booster</th>
-                                            <th class="text-center" colspan="1" rowspan="1">Hog Prestart</th>
-                                            <th class="text-center" colspan="1" rowspan="1">Starter</th>
-                                            <th class="text-center" colspan="1" rowspan="1">Grower</th>
-                                            <th class="text-center" colspan="1" rowspan="1">Finisher</th>
-                                            <th class="text-center" colspan="1" rowspan="1">Expected Date to be Sold</th>
+                                            <th>Feed Type</th>
+                                            <th>Duration</th>
+                                            <th>Feed Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center" colspan="1" rowspan="1">Duration</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 7</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 15</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 22</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 29</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 29</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 36</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 46</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 81</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 124</td>
-                                            <td class="text-center" colspan="1" rowspan="1">Day 144</td>
+                                            <td rowspan="4">Booster</td>
+                                            <td>Day 7</td>
+                                            <td>20g</td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" colspan="1" rowspan="1">Feed Amount</td>
-                                            <td class="text-center" colspan="1" rowspan="1">20g</td>
-                                            <td class="text-center" colspan="1" rowspan="1">50g</td>
-                                            <td class="text-center" colspan="1" rowspan="1">100g</td>
-                                            <td class="text-center" colspan="1" rowspan="1">300g</td>
-                                            <td class="text-center" colspan="1" rowspan="1">600g</td>
-                                            <td class="text-center" colspan="1" rowspan="1">1kg</td>
-                                            <td class="text-center" colspan="1" rowspan="1">2kg</td>
-                                            <td class="text-center" colspan="1" rowspan="1">2.2</td>
-                                            <td class="text-center" colspan="1" rowspan="1"></td>
+                                            <td>Day 15</td>
+                                            <td>50g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day 22</td>
+                                            <td>100g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Day 29</td>
+                                            <td>300g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hog PreStart</td>
+                                            <td>Day 36</td>
+                                            <td>600g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Starter</td>
+                                            <td>Day 46</td>
+                                            <td>1kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Grower</td>
+                                            <td>Day 81</td>
+                                            <td>2kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Finisher</td>
+                                            <td>Day 124</td>
+                                            <td>2.2 kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expected Date to be Sold</td>
+                                            <td>Day 144</td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile card card-body px-3 pt-3 pb-0">
+                <p>
+                    <strong class="text-danger">Assigned to:</strong>
+                </p>
+                <div class="profile-head">
+                    <div class="photo-content">
+                        <div class="cover-photo"></div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-photo">
+                            <img src="{{ asset('storage/users-avatar/' . auth()->user()->avatar) }}" class="img-fluid rounded-circle" alt="">
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="text-primary mb-0">{{ $staff->name }}</h4>
+                                <p>Staff</p>
+                            </div>
+                            <div class="profile-email px-2 pt-2">
+                                <p>{{ $staff->email }} / {{ $staff->phone }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label>Pig No.</label><br>
+                                <h4 class="text-black">{{ $pig->pig_no }}</h4>
+                            </div>
+                            <div class="form-group">
+                                <label>Breed</label><br>
+                                <h4 class="text-black">{{ $pig->breed }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label>Date Born</label><br>
+                                <h4 class="text-black">{{ $pig->date_born }}</h4>
+                            </div>
+                            <div class="form-group">
+                                <label>Origin</label><br>
+                                <h4 class="text-black">{{ $pig->origin }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label>DAM</label><br>
+                                <h4 class="text-black">{{ $pig->dam }}</h4>
+                            </div>
+                            <div class="form-group">
+                                <label>Date Procured</label><br>
+                                <h4 class="text-black">{{ $pig->date_procured }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label>Sire</label><br>
+                                <h4 class="text-black">{{ $pig->sire }}</h4>
+                            </div>
+                            <div class="form-group">
+                                <label>Type</label><br>
+                                <h4 class="text-black">{{ $pig->type }}</h4>
                             </div>
                         </div>
                     </div>

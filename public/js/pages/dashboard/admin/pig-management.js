@@ -13,31 +13,39 @@ $(function () {
         'ajax': '/func/pig/get-all/'+type,
         'columns': [
             {
-                'classname': 'text-center',
+                'className': 'text-center',
                 'data': 'viewActivity',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'pig_no',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'breed',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'date_born',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'origin',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'dam',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'date_procured',
             },
             {
+                'className': 'text-uppercase',
                 'data': 'sire',
             },
             {
+                'className': 'text-center',
                 'data': 'actions',
             }
         ],
