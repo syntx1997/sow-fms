@@ -33,6 +33,7 @@ Route::prefix('/func')->group(function () {
     Route::prefix('/auth')->group(function () {
         Route::post('/login', [UserController::class, 'login']);
         Route::get('/logout', [UserController::class, 'logout']);
+        Route::get('/check-if-logged-in', [UserController::class, 'checkIfLoggedIn']);
     });
 
     /* -- ---------- Users ----------- -- */
@@ -92,6 +93,11 @@ Route::prefix('/func')->group(function () {
         Route::post('/add', [SupplierController::class, 'add']);
         Route::post('/edit', [SupplierController::class, 'edit']);
         Route::post('/delete', [SupplierController::class, 'delete']);
+    });
+
+    /* -- ---------- Token ----------- -- */
+    Route::prefix('/token')->group(function () {
+        Route::get('/generate', [UserController::class, 'generateToken']);
     });
 
 });

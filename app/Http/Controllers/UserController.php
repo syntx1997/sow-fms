@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -34,7 +35,7 @@ class UserController extends Controller
 
         $email = User::where('email', $request->email)->first();
         if(!$email || !Hash::check($request->password, $email->password)) {
-            return response(['message' => 'Invalid email or password1'], 401);
+            return response(['message' => 'Invalid email or password!'], 401);
         }
 
         if(auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -126,6 +127,21 @@ class UserController extends Controller
         $staff->update($request->all());
 
         return response(['message' => 'Staff updated successfully!'], 201);
+    }
+
+    /*-- ----------- Check if Logged In -----------  --*/
+    public function checkIfLoggedIn() {
+        $loggedIn = false;
+        if (Auth::check()) {
+            $loggedIn = true;
+        }
+
+        return response(['logged_in' => $loggedIn]);
+    }
+
+    /*-- ----------- Generate Token -----------  --*/
+    public function generateToken() {
+        return response(['token' => csrf_token()], 201);
     }
 
     /*-- ----------- Private Functions -----------  --*/
