@@ -260,6 +260,65 @@
                             @endif
                             <div class="tab-pane fade {{ $pig->type != 'Sow' ? 'show active' : '' }}" id="feeding">
                                 @if($pig->type == 'Sow')
+                                    <div class="mb-3">
+                                        @php
+                                            $currentStage = 'none';
+                                            $currentDuration = 0;
+                                            $currentFeedType = 'none';
+                                            $currentFeedAmount = 0;
+
+                                            $dateToday = \Carbon\Carbon::now();
+
+                                            $littered = \App\Models\Litter::where('pig_id', $pig->id)->latest()->first();
+                                            if ($littered) {
+                                                $mated = \App\Models\Mating::where('litter_no', $littered->litter_no)->latest()->first();
+                                                if ($mated) {
+                                                    $dateMated = \Carbon\Carbon::parse($mated->date);
+                                                    if ($dateMated->diffInDays($dateToday) <= 100) {
+                                                        $currentStage = 'Breeding to Gestation';
+                                                        $currentDuration = $dateMated->diffInDays($dateToday);
+                                                    } else if ($dateMated->diffInDays($dateToday) <= 128) {
+                                                        $currentStage = 'Gestation to Weaning';
+                                                        if ($dateMated->diffInDays($dateToday) == 100) {
+                                                            $currentDuration = 'Day 100 - Farrowing';
+                                                        } else if ($dateMated->diffInDays($dateToday) == 101) {
+                                                            $currentDuration = 'Day 1 - After Farrowing';
+                                                        } else if ($dateMated->diffInDays($dateToday) <= 128){
+                                                            $currentDuration = ($dateMated->diffInDays($dateToday)-100);
+                                                        }
+                                                    }
+
+                                                    if ($dateMated->diffInDays($dateToday) <= 30) {
+                                                        $currentFeedType = 'Breeder';
+                                                        $currentFeedAmount = '1.5 kgs';
+                                                    } else if ($dateMated->diffInDays($dateToday) <= 70) {
+                                                        $currentFeedType = 'Breeder';
+                                                        $currentFeedAmount = '2.5-3.0 kgs';
+                                                    } else if ($dateMated->diffInDays($dateToday) <= 100) {
+                                                        $currentFeedType = 'Breeder';
+                                                        $currentFeedAmount = '3.0-3.5 kgs';
+                                                    } else if ($dateMated->diffInDays($dateToday) == 100) {
+                                                        $currentFeedType = 'Lactating';
+                                                        $currentFeedAmount = '2.5-3.0 kgs';
+                                                    } else if ($dateMated->diffInDays($dateToday) == 101) {
+                                                        $currentFeedType = 'Lactating';
+                                                        $currentFeedAmount = '1.0-1.5 kgs';
+                                                    } else if ($dateMated->diffInDays($dateToday) <= 104) {
+                                                        $currentFeedType = 'Lactating';
+                                                        $currentFeedAmount = '3.0-3.5 kgs';
+                                                    } else if ($dateMated->diffInDays($dateToday) <= 128) {
+                                                        $currentFeedType = 'Lactating';
+                                                        $currentFeedAmount = '5-6 kgs';
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Stage: <strong class="text-danger">{{ $currentStage }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Duration: <strong class="text-danger">{{ $currentDuration }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Type: <strong class="text-danger">{{ $currentFeedType }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Amount: <strong class="text-danger">{{ $currentFeedAmount }}</strong></span>
+                                    </div>
+                                    <strong><i class="fa fa-book"></i> Feeding Guide</strong>
                                     <table class="table table-bordered" style="width: 100%">
                                         <thead>
                                         <tr>
@@ -278,7 +337,7 @@
                                         </tr>
                                         <tr>
                                             <td>Day 31-70</td>
-                                            <td>Day 3.0-3.5 kgs</td>
+                                            <td>3.0-3.5 kgs</td>
                                         </tr>
                                         <tr>
                                             <td>Day 31-100</td>
@@ -288,7 +347,7 @@
                                             <td rowspan="4">Gestation to Weaning</td>
                                             <td>Day 100 - Farrowing</td>
                                             <td rowspan="4">Lactating</td>
-                                            <td>3.0 - 3.5 kgs</td>
+                                            <td>2.5 - 3.0 kgs</td>
                                         </tr>
                                         <tr>
                                             <td>Day 1 After Farrowing</td>
@@ -296,7 +355,7 @@
                                         </tr>
                                         <tr>
                                             <td>Day 2-4</td>
-                                            <td>2.0-2.5 kgs</td>
+                                            <td>3.0-3.5 kgs</td>
                                         </tr>
                                         <tr>
                                             <td>Day 4-28</td>
