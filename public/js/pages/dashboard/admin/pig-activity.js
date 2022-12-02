@@ -315,6 +315,7 @@ $(document).on('click', '#editMatingBtn', function (e) {
     formInput(editMatingForm, 'input', 'date').val(data.date);
     formInput(editMatingForm, 'select', 'boar').val(data.boar);
     formInput(editMatingForm, 'input', 'id').val(data.id);
+    formInput(editMatingForm, 'input', 'litter_no').val(data.litter_no);
 
     showModal(editMatingModal);
 });

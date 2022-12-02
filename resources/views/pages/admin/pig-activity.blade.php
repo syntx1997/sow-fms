@@ -76,7 +76,7 @@
                                         <p>no schedules yet</p>
                                     @else
                                         <div id="accordion-one" class="accordion accordion-primary">
-                                            @foreach(\App\Models\Litter::where('pig_id', $pig->id)->get() as $index => $litter)
+                                            @foreach(\App\Models\Litter::where('pig_id', $pig->id)->orderBy('id', 'DESC')->get() as $index => $litter)
                                                 <div class="accordion__item">
                                                     <div class="accordion__header {{ $index !== 0 ? 'collapsed' : '' }} rounded-lg" data-toggle="collapse" data-target="#{{ $litter->litter_no }}">
                                                         <span class="accordion__header--text font-weight-bold">#{{ $litter->litter_no }}</span>
@@ -86,8 +86,29 @@
                                                         <div class="accordion__body--text">
                                                             <div class="row mb-3">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    <span class="badge badge-rounded badge-danger">Days after Mated: <span class="font-weight-bold">0</span></span>
-                                                                    <span class="badge badge-rounded badge-danger">Days after Farrowed: <span class="font-weight-bold">0</span></span>
+
+                                                                    @php
+                                                                        $daysAfterMated = 0;
+                                                                        $daysAfterFarrowed = 0;
+                                                                        $dateToday = \Carbon\Carbon::now();
+
+                                                                        $mated = \App\Models\Mating::where('litter_no', $litter->litter_no)->latest()->first();
+                                                                        if ($mated) {
+                                                                            $dateMated = \Carbon\Carbon::parse($mated->date);
+                                                                            $daysAfterMated = $dateMated->diffInDays($dateToday);
+                                                                        }
+
+                                                                        $farrowed = \App\Models\Farrowing::where('litter_no', $litter->litter_no)->latest()->first();
+                                                                        if($farrowed) {
+                                                                            $dateFarrowed = \Carbon\Carbon::parse($farrowed->actual_date);
+                                                                            if ($dateToday > $dateFarrowed) {
+                                                                                $daysAfterFarrowed = $dateFarrowed->diffInDays($dateToday);
+                                                                            }
+                                                                        }
+                                                                    @endphp
+
+                                                                    <span class="badge badge-rounded badge-danger">Days after Mated: <span class="font-weight-bold">{{ $daysAfterMated }}</span></span>
+                                                                    <span class="badge badge-rounded badge-danger">Days after Farrowed: <span class="font-weight-bold">{{ $daysAfterFarrowed }}</span></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -522,6 +543,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id">
+                    <input type="hidden" name="litter_no">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
