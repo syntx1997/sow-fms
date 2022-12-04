@@ -364,6 +364,36 @@
                                         </tbody>
                                     </table>
                                 @elseif($pig->type == 'Gilt')
+                                    <div class="mb-3">
+                                        @php
+                                            $currentStage = 'none';
+                                            $currentDuration = 0;
+                                            $currentFeedType = 'none';
+                                            $currentFeedAmount = 0;
+
+                                            $dateToday = \Carbon\Carbon::now();
+
+                                            $giltDateAdded = \Carbon\Carbon::parse($pig->created_at);
+                                            if ($giltDateAdded->diffInDays($dateToday) <= 154) {
+                                                $currentStage = 'Growing to Breeding';
+                                            }
+
+                                            $currentDuration = $giltDateAdded->diffInDays($dateToday);
+
+                                            if ($giltDateAdded->diffInDays($dateToday) <= 153) {
+                                                $currentFeedType = 'Grower';
+                                                $currentFeedAmount = '2.0 kgs';
+                                            } else if ($giltDateAdded->diffInDays($dateToday) == 154) {
+                                                $currentFeedType = 'Breeder';
+                                                $currentFeedAmount = '2.0 kgs';
+                                            }
+                                        @endphp
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Stage: <strong class="text-danger">{{ $currentStage }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Duration: <strong class="text-danger">{{ $currentDuration }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Type: <strong class="text-danger">{{ $currentFeedType }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Amount: <strong class="text-danger">{{ $currentFeedAmount }}</strong></span>
+                                    </div>
+                                    <strong><i class="fa fa-book"></i> Feeding Guide</strong>
                                     <table class="table table-bordered" style="width: 100%">
                                         <thead>
                                         <tr>
@@ -388,6 +418,36 @@
                                         </tbody>
                                     </table>
                                     @elseif($pig->type == 'Boar')
+                                        <div class="mb-3">
+                                            @php
+                                                $currentStage = 'none';
+                                                $currentDuration = 0;
+                                                $currentFeedType = 'none';
+                                                $currentFeedAmount = 0;
+
+                                                $dateToday = \Carbon\Carbon::now();
+
+                                                $boarDateAdded = \Carbon\Carbon::parse($pig->created_at);
+                                                if ($boarDateAdded->diffInDays($dateToday) <= 154) {
+                                                    $currentStage = 'Growing to Breeding';
+                                                }
+
+                                                if ($boarDateAdded->diffInDays($dateToday) <= 153) {
+                                                    $currentFeedType = 'Grower';
+                                                    $currentFeedAmount = '2.0 kgs';
+                                                } else if ($boarDateAdded->diffInDays($dateToday) == 154) {
+                                                    $currentFeedType = 'Breeder';
+                                                    $currentFeedAmount = '1.5 kgs';
+                                                }
+
+                                                $currentDuration = $boarDateAdded->diffInDays($dateToday);
+                                            @endphp
+                                            <span class="badge badge-outline-dark badge-rounded mb-2">Current Stage: <strong class="text-danger">{{ $currentStage }}</strong></span>
+                                            <span class="badge badge-outline-dark badge-rounded mb-2">Current Duration: <strong class="text-danger">{{ $currentDuration }}</strong></span>
+                                            <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Type: <strong class="text-danger">{{ $currentFeedType }}</strong></span>
+                                            <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Amount: <strong class="text-danger">{{ $currentFeedAmount }}</strong></span>
+                                        </div>
+                                        <strong><i class="fa fa-book"></i> Feeding Guide</strong>
                                         <table class="table table-bordered" style="width: 100%">
                                             <thead>
                                             <tr>
@@ -412,6 +472,49 @@
                                             </tbody>
                                         </table>
                                 @elseif($pig->type == 'Piglet')
+                                    <div class="mb-3">
+                                        @php
+                                            $currentDuration = 0;
+                                            $currentFeedType = 'none';
+                                            $currentFeedAmount = 0;
+
+                                            $dateToday = \Carbon\Carbon::now();
+                                            $pigletDateAdded = $pig->created_at;
+                                            $currentDuration = $pigletDateAdded->diffInDays($dateToday);
+
+                                            if ($currentDuration >= 7 && $currentDuration <= 14) {
+                                                $currentFeedAmount = '20g';
+                                            } else if ($currentDuration >= 15 && $currentDuration <= 21) {
+                                                $currentFeedAmount = '50g';
+                                            } else if ($currentDuration >= 22 && $currentDuration <= 28) {
+                                                $currentFeedAmount = '100g';
+                                            } else if ($currentDuration >= 19 && $currentDuration <= 35) {
+                                                $currentFeedAmount = '300g';
+                                            }
+
+                                            if ($currentDuration <= 29) {
+                                                $currentFeedType = 'Booster';
+                                            } else if ($currentDuration >= 36 && $currentDuration <= 45) {
+                                                $currentFeedType = 'Hog PreStart';
+                                                $currentFeedAmount = '600g';
+                                            } else if ($currentDuration >= 46 && $currentDuration <= 80) {
+                                                $currentFeedType = 'Starter';
+                                                $currentFeedAmount = '1kg';
+                                            } else if ($currentDuration >= 81 && $currentDuration <= 123) {
+                                                $currentFeedType = 'Grower';
+                                                $currentFeedAmount = '2kg';
+                                            } else if ($currentDuration >= 124 && $currentDuration <= 143) {
+                                                $currentFeedType = 'Finisher';
+                                                $currentFeedAmount = '2.2 kg';
+                                            } else if ($currentDuration >= 144) {
+                                                $currentFeedType = 'Expected Date to be Sold';
+                                            }
+                                        @endphp
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Duration: <strong class="text-danger">{{ $currentDuration }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Type: <strong class="text-danger">{{ $currentFeedType }}</strong></span>
+                                        <span class="badge badge-outline-dark badge-rounded mb-2">Current Feed Amount: <strong class="text-danger">{{ $currentFeedAmount }}</strong></span>
+                                    </div>
+                                    <strong><i class="fa fa-book"></i> Feeding Guide</strong>
                                     <table class="table table-bordered" style="width: 100%">
                                         <thead>
                                         <tr>
