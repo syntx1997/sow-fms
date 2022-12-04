@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pig;
+use App\Models\Assign;
 
 class StaffDashboardController extends Controller
 {
@@ -23,6 +25,18 @@ class StaffDashboardController extends Controller
         return view('pages.staff.pigs-assigned', [
             'title' => 'Pig(s) Assigned',
             'js' => asset('js/pages/dashboard/staff/pigs-assigned.js')
+        ]);
+    }
+
+    public function pigActivity($pigId) {
+        $pig = Pig::where('id', $pigId)->first();
+        $assign = Assign::where('pig_id', $pigId)->first();
+
+        return view('pages.admin.pig-activity', [
+            'title' => $pig->pig_no . '\'s Activity/Schedule',
+            'js' => asset('js/pages/dashboard/admin/pig-activity.js'),
+            'pig' => $pig,
+            'assign' => $assign
         ]);
     }
 }

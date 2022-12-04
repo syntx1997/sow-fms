@@ -103,7 +103,7 @@ class PigController extends Controller
             $pig = Pig::where('id', $assign->pig_id)->first();
 
             $actions = <<<HERE
-                <a href="/dashboard/admin/view-activity/$pig->id" class="ml-2 btn btn-xs px-2 light btn-success">
+                <a href="/dashboard/staff/view-activity/$pig->id" class="ml-2 btn btn-xs px-2 light btn-success">
                     <i class="flaticon-057-eye"></i> View Schedules
                 </a>
             HERE;
