@@ -26,7 +26,7 @@ class SupplierController extends Controller
         return response(['message' => 'New supplier added successfully!']);
     }
 
-    public function edit() {
+    public function edit(Request $request) {
         $validation = Validator::make($request->all(), [
             'name' => 'required',
             'latitude' => 'required',
@@ -46,7 +46,7 @@ class SupplierController extends Controller
         return response(['message' => 'Supplier updated successfully!']);
     }
 
-    public function delete() {
+    public function delete(Request $request) {
         $validation = Validator::make($request->all(), [
             'id' => 'required'
         ]);
@@ -59,5 +59,10 @@ class SupplierController extends Controller
         $supplier->delete();
 
         return response(['message' => 'Supplier deleted successfully!']);
+    }
+
+    public function getAll() {
+        $data = [];
+        return response(['data' => Supplier::all()]);
     }
 }

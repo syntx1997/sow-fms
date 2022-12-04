@@ -93,6 +93,7 @@ Route::prefix('/func')->group(function () {
         Route::post('/add', [SupplierController::class, 'add']);
         Route::post('/edit', [SupplierController::class, 'edit']);
         Route::post('/delete', [SupplierController::class, 'delete']);
+        Route::get('/get-all', [SupplierController::class, 'getAll']);
     });
 
     /* -- ---------- Token ----------- -- */
