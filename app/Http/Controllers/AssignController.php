@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assign;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,6 +21,9 @@ class AssignController extends Controller
 
         Assign::create($request->all());
 
-        return response(['message' => 'Staff assigned successfully!'], 201);
+        $user = User::where('id', $request->user_id)->first();
+        $sendSMS = SPSendSMS($user->phone, 'A new pig has been assigned to you. Kindly check it on your app or visit https://stracker-fms.com.');
+
+        return response(['message' => 'Staff assigned successfully!', 'sms' => $sendSMS], 201);
     }
 }
