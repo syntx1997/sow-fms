@@ -119,6 +119,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
             Route::get('/boar', [AdminDashboardController::class, 'PGBoar']);
             Route::get('/piglet', [AdminDashboardController::class, 'PGPiglet']);
             Route::get('/gilt', [AdminDashboardController::class, 'PGGilt']);
+            Route::get('/under-observation', [AdminDashboardController::class, 'underObservation']);
         });
     });
 

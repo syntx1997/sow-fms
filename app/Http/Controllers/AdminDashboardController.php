@@ -74,4 +74,11 @@ class AdminDashboardController extends Controller
             'js' => asset('js/pages/dashboard/admin/pig-management.js')
         ]);
     }
+
+    public function underObservation() {
+        return view('pages.admin.pig-management.under-observation', [
+            'title' => 'Under Observation',
+            'js' => asset('js/pages/dashboard/admin/under-observation.js')
+        ]);
+    }
 }

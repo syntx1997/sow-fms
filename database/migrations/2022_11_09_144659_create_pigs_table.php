@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('sire');
             $table->string('type');
             $table->string('photo')->default('no-img.png')->nullable();
+            $table->boolean('under_observation')->default(0);
             $table->timestamps();
         });
     }

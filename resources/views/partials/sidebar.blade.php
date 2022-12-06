@@ -26,6 +26,7 @@
                         <li><a href="{{ url('/dashboard/admin/pig-management/boar') }}">Boar</a></li>
                         <li><a href="{{ url('/dashboard/admin/pig-management/piglet') }}">Piglet</a></li>
                         <li><a href="{{ url('/dashboard/admin/pig-management/gilt') }}">Gilt</a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/under-observation') }}">Under Observation</a></li>
                     </ul>
                 </li>
                 <li><a href="{{ url('/dashboard/admin/user-management') }}" class="ai-icon" aria-expanded="false">
