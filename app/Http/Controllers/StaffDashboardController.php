@@ -39,4 +39,10 @@ class StaffDashboardController extends Controller
             'assign' => $assign
         ]);
     }
+
+    public function suppliers() {
+        return view('pages.admin.suppliers', [
+            'title' => 'Suppliers'
+        ]);
+    }
 }

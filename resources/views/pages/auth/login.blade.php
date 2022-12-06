@@ -21,7 +21,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" name="password" class="form-control" placeholder="Password">
+                                            <div class="input-group mb-2 mr-sm-2">
+                                                <input type="password" id="password" name="password" class="form-control">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text" onclick="password_show_hide();">
+                                                        <i class="flaticon-057-eye" id="show_eye"></i>
+                                                        <i class="flaticon-058-hide d-none" id="hide_eye"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                         </div>

@@ -11,9 +11,11 @@
                 <span></span>
             </div>
             <div class="chat-left-sidebar">
-                <div class="d-flex chat-fix-search align-items-center">
-                    <button type="button" class="d-flex btn btn-link" data-toggle="modal" data-target="#addSupplierModal"><i class="flaticon-381-plus mr-3"></i> Add Supplier</button>
-                </div>
+                @if(auth()->user()->role == 'Administrator')
+                    <div class="d-flex chat-fix-search align-items-center">
+                        <button type="button" class="d-flex btn btn-link" data-toggle="modal" data-target="#addSupplierModal"><i class="flaticon-381-plus mr-3"></i> Add Supplier</button>
+                    </div>
+                @endif
                 <div class="card-body message-bx px-0 pt-3">
                     <div class="tab-content dz-scroll" id="message-bx">
                         <div class="list-group list-group-flush">
@@ -24,12 +26,14 @@
                                         <small class="text-muted"><button class="btn btn-sm btn-link" onclick="navigate({{ $supplier->latitude }}, {{ $supplier->longitude }})"><i class="flaticon-381-map-2"></i></button></small>
                                     </div>
                                     <div class="col-10 mb-1 small">{{ $supplier->address }} - {{ $supplier->contact }}</div>
-                                    <button id="editSupplierBtn" type="button" class="btn btn-link" data-data="{{ json_encode($supplier) }}">
-                                        <i class="fa fa-edit text-success"></i>
-                                    </button>
-                                    <button id="deleteSupplierBtn" type="button" class="btn btn-link" data-data="{{ json_encode($supplier) }}">
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </button>
+                                    @if(auth()->user()->role == 'Administrator')
+                                        <button id="editSupplierBtn" type="button" class="btn btn-link" data-data="{{ json_encode($supplier) }}">
+                                            <i class="fa fa-edit text-success"></i>
+                                        </button>
+                                        <button id="deleteSupplierBtn" type="button" class="btn btn-link" data-data="{{ json_encode($supplier) }}">
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </button>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>

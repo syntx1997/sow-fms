@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li><a href="{{ url('/dashboard/admin/suppliers') }}" class="ai-icon" aria-expanded="false">
-                        <i class="flaticon-381-user"></i>
+                        <i class="flaticon-381-map-2"></i>
                         <span class="nav-text">Suppliers</span>
                     </a>
                 </li>
@@ -56,6 +56,11 @@
                 <li><a href="{{ url('/dashboard/staff/guide') }}" class="ai-icon" aria-expanded="false">
                         <i class="flaticon-381-book"></i>
                         <span class="nav-text">Guide</span>
+                    </a>
+                </li>
+                <li><a href="{{ url('/dashboard/staff/suppliers') }}" class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-381-map-2"></i>
+                        <span class="nav-text">Suppliers</span>
                     </a>
                 </li>
             @endif
