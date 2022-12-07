@@ -8,8 +8,8 @@
     <meta name="author" content="">
     <meta name="robots" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Sow Feeding Management System">
-    <meta property="og:title" content="Sow Feeding Management System">
+    <meta name="description" content="Stracker: Sow Feeding Management System">
+    <meta property="og:title" content="Stracker: Sow Feeding Management System">
     <meta property="og:description" content="Sow Feeding Management System">
     <meta property="og:image" content="https://minsu.edu.ph/template/images/logo.png">
     <meta name="format-detection" content="telephone=no">
