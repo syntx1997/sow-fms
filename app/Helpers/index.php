@@ -58,10 +58,11 @@ if (!function_exists('SPSendSMS')) {
         $parameters = [
             'apikey' => env('SEMAPHORE_API_KEY'),
             'number' => $recipient,
-            'message' => $message
+            'message' => $message,
+            'sendername' => 'STRACKER'
         ];
 
-        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
+        curl_setopt( $ch, CURLOPT_URL,'https://api.semaphore.co/api/v4/priority' );
         curl_setopt( $ch, CURLOPT_POST, 1 );
 
         //Send the parameters set above with the request
