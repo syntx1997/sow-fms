@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>{{ $title ?? '' }}</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/pig.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
     <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
