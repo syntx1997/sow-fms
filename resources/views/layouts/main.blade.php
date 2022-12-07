@@ -12,7 +12,7 @@
 	<meta name="description" content="Sow Feeding Management System">
 	<meta property="og:title" content="Sow Feeding Management System">
 	<meta property="og:description" content="Sow Feeding Management System">
-	<meta property="og:image" content="https://minsu.edu.ph/template/images/logo.png">
+	<meta property="og:image" content="{{ asset('images/st-logo-text.png') }}">
 	<meta name="format-detection" content="telephone=no">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>{{ $title ?? '' }}</title>
