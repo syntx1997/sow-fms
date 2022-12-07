@@ -17,16 +17,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'SowFMS Administrator',
-            'email' => 'admin@sowfms.com',
+            'name' => 'Stracker Administrator',
+            'email' => 'admin@stracker-fms.com',
             'phone' => '09156390988',
             'password' => bcrypt('admin@1234'),
             'role' => 'Administrator'
         ]);
 
         User::create([
-            'name' => 'SowFMS Staff',
-            'email' => 'staff@sowfms.com',
+            'name' => 'Stracker Staff',
+            'email' => 'staff@stracker-fms.com',
             'phone' => '09156390981',
             'password' => bcrypt('staff@1234'),
             'role' => 'Staff'
