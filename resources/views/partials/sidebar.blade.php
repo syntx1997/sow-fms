@@ -19,7 +19,7 @@
                 <li class="nav-label first">Main Menu</li>
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-089-piggy-bank"></i>
-                        <span class="nav-text">Pig Management</span>
+                        <span class="nav-text">Pig Management <span class="badge badge-circle badge-success badge-sm">{{ \App\Models\Pig::count() }}</span></span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ url('/dashboard/admin/pig-management/sow') }}">Sow</a></li>
@@ -37,6 +37,7 @@
                 <li><a href="{{ url('/dashboard/admin/suppliers') }}" class="ai-icon" aria-expanded="false">
                         <i class="flaticon-381-map-2"></i>
                         <span class="nav-text">Suppliers</span>
+                        <span class="badge badge-circle badge-success badge-sm pull-right">{{ \App\Models\Supplier::count() }}</span>
                     </a>
                 </li>
             @endif
