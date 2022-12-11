@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Helpers;
-
 /*-- ----------- This is to show edit and delete button -----------  --*/
 if(!function_exists('editDeleteBtn')) {
     function editDeleteBtn($btnName, $data):string {
