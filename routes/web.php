@@ -21,6 +21,8 @@ use App\Http\Controllers\SupplierController;
 
 use App\Http\Controllers\ObservationController;
 
+use App\Http\Controllers\SettingsController;
+
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
 
@@ -108,6 +110,12 @@ Route::prefix('/func')->group(function () {
         Route::post('/add', [ObservationController::class, 'add']);
         Route::post('/edit', [ObservationController::class, 'edit']);
         Route::post('/delete', [ObservationController::class, 'delete']);
+    });
+
+    /* -- ---------- Settings ----------- -- */
+    Route::prefix('/settings')->group(function () {
+        Route::post('/update-information', [SettingsController::class, 'updateInformation']);
+        Route::post('/update-password', [SettingsController::class, 'updatePassword']);
     });
 
 });
