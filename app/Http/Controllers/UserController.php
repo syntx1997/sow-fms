@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +66,9 @@ class UserController extends Controller
                 'number' => '<h6>'.($index + 1).'.</h6>',
                 'staff' => $this->user($staff->avatar, $staff->name, $staff->email),
                 'action' => editDeleteBtn('staff', $staff),
-                'date' => Carbon::parse($staff->created_at)->format('m/d/Y')
+                'assigned' => Assign::where('user_id', $staff->id)->count(),
+                'date' => Carbon::parse($staff->created_at)->format('m/d/Y'),
+                'pigs' => Assign::where('user_id', $staff->id)->join('pigs', 'pigs.id', '=', 'assigns.pig_id')->get('pigs.*')
             ]);
         }
 

@@ -14,10 +14,12 @@
                     <table class="table style-1" id="staffTable">
                         <thead>
                         <tr>
+                            <th></th>
                             <th>#</th>
                             <th>STAFF</th>
                             <th>PHONE #</th>
                             <th>DATE ADDED</th>
+                            <th>Assigned</th>
                             <th>ACTION</th>
                         </tr>
                         </thead>

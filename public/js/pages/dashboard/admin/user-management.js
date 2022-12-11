@@ -13,6 +13,12 @@ $(function (){
         'ajax': '/func/user/get/staff/all',
         'columns': [
             {
+                'className':        'details-control',
+                'orderable':        false,
+                'data':             '',
+                'defaultContent':   '',
+            },
+            {
                 'data': 'number'
             },
             {
@@ -24,6 +30,9 @@ $(function (){
             {
                 'className': 'text-primary',
                 'data': 'date'
+            },
+            {
+                'data': 'assigned'
             },
             {
                 'data': 'action'
@@ -38,6 +47,19 @@ $(function (){
                 next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
                 previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
             }
+        }
+    });
+
+    $('#staffTable tbody').on('click', 'td.details-control', function() {
+        const tr  = $(this).closest('tr');
+        const row = staffDataTable.row( tr );
+
+        if ( row.child.isShown() ) {
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            row.child( more_details( row.data() ) ).show();
+            tr.addClass('shown');
         }
     });
 
@@ -162,3 +184,41 @@ $(document).on('click', '#staffDeleteBtn', function () {
         }
     })
 });
+
+function more_details(data) {
+    const pigs = data.pigs;
+    let pigRow = '';
+
+    pigs.map(pig => {
+        pigRow += `
+            <tr>
+                <td><img src="/storage/${pig.photo}" style="width: 100px"></td>
+                <td>${pig.type}</td>
+                <td>${pig.pig_no}</td>
+            </tr>
+        `;
+    });
+
+    if (pigs.length == 0) {
+        pigRow += `
+            <tr>
+                <td colspan="3" class="text-center">no pigs assigned yet</td>
+            </tr>
+        `;
+    }
+
+
+    return `
+        <p><strong>Pigs Assigned</strong></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Type</th>
+                    <th>Pig No.</th>
+                </tr>
+            </thead>
+            <tbody>${pigRow}</tbody>
+        </table>
+    `;
+}
