@@ -133,9 +133,9 @@
                                                                                                             <a href="#" id="editMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
                                                                                                                 <i class="fa fa-edit"></i>
                                                                                                             </a>
-                                                                                                            <a href="#" id="deleteMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
-                                                                                                                <i class="fa fa-trash"></i>
-                                                                                                            </a>
+{{--                                                                                                            <a href="#" id="deleteMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">--}}
+{{--                                                                                                                <i class="fa fa-trash"></i>--}}
+{{--                                                                                                            </a>--}}
                                                                                                         @endif
                                                                                                     </td>
                                                                                                 </tr>
