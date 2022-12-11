@@ -129,24 +129,17 @@
                                                                                                     <td class="text-center p-2">{{ $mating->date }}</td>
                                                                                                     <td class="text-center p-2 align-middle font-weight-bold">{{ $mating->boar }}</td>
                                                                                                     <td class="text-center p-2 align-middle">
-                                                                                                        @if(auth()->user()->role == 'Administrator')
-                                                                                                            <a href="#" id="editMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
-                                                                                                                <i class="fa fa-edit"></i>
-                                                                                                            </a>
-{{--                                                                                                            <a href="#" id="deleteMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">--}}
-{{--                                                                                                                <i class="fa fa-trash"></i>--}}
-{{--                                                                                                            </a>--}}
-                                                                                                        @endif
+                                                                                                        <a href="#" id="editMatingBtn" class="text-muted" data-data="{{ json_encode($mating) }}">
+                                                                                                            <i class="fa fa-edit"></i>
+                                                                                                        </a>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </table>
                                                                                         @endforeach
                                                                                     @endif
-                                                                                    @if(auth()->user()->role == 'Administrator')
-                                                                                        <button type="button" id="addMatingBtn" data-litter_no="{{ $litter->litter_no }}" class="btn btn-link btn-sm">
-                                                                                            <i class="fa fa-plus"></i> Add New Schedule
-                                                                                        </button>
-                                                                                    @endif
+                                                                                    <button type="button" id="addMatingBtn" data-litter_no="{{ $litter->litter_no }}" class="btn btn-link btn-sm">
+                                                                                        <i class="fa fa-plus"></i> Add New Schedule
+                                                                                    </button>
                                                                                 </div>
                                                                             </li>
                                                                             <li>
@@ -181,11 +174,9 @@
                                                                                     @if(! \App\Models\Farrowing::where('litter_no', $litter->litter_no)->first())
                                                                                         <p class="text-muted">no schedule yet</p>
                                                                                     @endif
-                                                                                    @if(auth()->user()->role == 'Administrator')
-                                                                                        <button type="button" id="editFarrowingBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-farrowing="{{ json_encode(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->first()) }}">
-                                                                                            <i class="fa fa-edit"></i>
-                                                                                        </button>
-                                                                                    @endif
+                                                                                    <button type="button" id="editFarrowingBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-farrowing="{{ json_encode(\App\Models\Farrowing::where('litter_no', $litter->litter_no)->first()) }}">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </button>
                                                                                 </div>
                                                                             </li>
                                                                             <li>
@@ -212,11 +203,9 @@
                                                                                     @if(! \App\Models\Weaning::where('litter_no', $litter->litter_no)->first())
                                                                                         <p class="text-muted">no schedule yet</p>
                                                                                     @endif
-                                                                                    @if(auth()->user()->role == 'Administrator')
-                                                                                        <button type="button" id="editWeaningBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-weaning="{{ json_encode(\App\Models\Weaning::where('litter_no', $litter->litter_no)->first()) }}">
-                                                                                            <i class="fa fa-edit"></i>
-                                                                                        </button>
-                                                                                    @endif
+                                                                                    <button type="button" id="editWeaningBtn" class="btn btn-link" data-litter_no="{{ $litter->litter_no }}" data-weaning="{{ json_encode(\App\Models\Weaning::where('litter_no', $litter->litter_no)->first()) }}">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </button>
                                                                                 </div>
                                                                             </li>
                                                                             <li>
@@ -225,24 +214,20 @@
                                                                                 <div class="timeline-panel text-muted" href="#">
                                                                                     <h6 class="mb-0">Remarks</h6>
                                                                                     @if(\App\Models\Remark::where('litter_no', $litter->litter_no)->count() == 0)
-                                                                                        @if(auth()->user()->role == 'Administrator')
-                                                                                            <div class="form-group">
-                                                                                                <form id="editRemarksForm">
-                                                                                                    @csrf
-                                                                                                    <textarea name="remarks" class="form-control"></textarea>
-                                                                                                    <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
-                                                                                                    <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
-                                                                                                </form>
-                                                                                            </div>
-                                                                                        @endif
+                                                                                        <div class="form-group">
+                                                                                            <form id="editRemarksForm">
+                                                                                                @csrf
+                                                                                                <textarea name="remarks" class="form-control"></textarea>
+                                                                                                <input type="hidden" name="litter_no" value="{{ $litter->litter_no }}">
+                                                                                                <button type="submit" class="btn btn-light mt-2">Save Remarks</button>
+                                                                                            </form>
+                                                                                        </div>
                                                                                     @else
                                                                                         @php
                                                                                             $remarks = \App\Models\Remark::where('litter_no', $litter->litter_no)->first();
                                                                                         @endphp
                                                                                         {{ $remarks->remarks }}
-                                                                                        @if(auth()->user()->role == 'Administrator')
-                                                                                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#editRemarks{{ $litter->litter_no }}"><i class="fa fa-edit"></i></button>
-                                                                                        @endif
+                                                                                        <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#editRemarks{{ $litter->litter_no }}"><i class="fa fa-edit"></i></button>
                                                                                         <div class="collapse" id="editRemarks{{ $litter->litter_no }}">
                                                                                             <div class="form-group">
                                                                                                 <form id="editRemarksForm">
