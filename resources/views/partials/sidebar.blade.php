@@ -19,13 +19,13 @@
                 <li class="nav-label first">Main Menu</li>
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-089-piggy-bank"></i>
-                        <span class="nav-text">Pig Management <span class="badge badge-circle badge-success badge-sm">{{ \App\Models\Pig::count() }}</span></span>
+                        <span class="nav-text">Pig Management</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ url('/dashboard/admin/pig-management/sow') }}">Sow</a></li>
-                        <li><a href="{{ url('/dashboard/admin/pig-management/boar') }}">Boar</a></li>
-                        <li><a href="{{ url('/dashboard/admin/pig-management/piglet') }}">Piglet</a></li>
-                        <li><a href="{{ url('/dashboard/admin/pig-management/gilt') }}">Gilt</a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/sow') }}">Sow <span class="badge badge-pill badge-success badge-sm">{{ \App\Models\Pig::where('type', 'Sow')->count() }}</span></a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/boar') }}">Boar <span class="badge badge-pill badge-success badge-sm">{{ \App\Models\Pig::where('type', 'Boar')->count() }}</span></a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/piglet') }}">Piglet <span class="badge badge-pill badge-success badge-sm">{{ \App\Models\Pig::where('type', 'Piglet')->count() }}</span></a></li>
+                        <li><a href="{{ url('/dashboard/admin/pig-management/gilt') }}">Gilt <span class="badge badge-pill badge-success badge-sm">{{ \App\Models\Pig::where('type', 'Gilt')->count() }}</span></a></li>
                         <li><a href="{{ url('/dashboard/admin/pig-management/under-observation') }}">Under Observation</a></li>
                     </ul>
                 </li>
