@@ -3,7 +3,7 @@
         <div class="main-profile">
             <div class="image-bx">
                 <img src="{{ asset('storage/users-avatar/' . auth()->user()->avatar) }}" alt="">
-                <a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                <a href="{{ auth()->user()->role == 'Administrator' ? url('/dashboard/admin/settings') : url('/dashboard/staff/settings') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>
             </div>
             <h5 class="name"><span class="font-w400">Hello,</span> {{ auth()->user()->name }}</h5>
         </div>

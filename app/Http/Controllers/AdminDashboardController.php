@@ -81,4 +81,11 @@ class AdminDashboardController extends Controller
             'js' => asset('js/pages/dashboard/admin/under-observation.js')
         ]);
     }
+
+    public function settings() {
+        return view('pages.admin.settings', [
+            'title' => 'Settings',
+            'js' => asset('js/pages/dashboard/admin/settings.js')
+        ]);
+    }
 }

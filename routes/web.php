@@ -19,6 +19,8 @@ use App\Http\Controllers\BreedingToGestationController;
 
 use App\Http\Controllers\SupplierController;
 
+use App\Http\Controllers\ObservationController;
+
 Route::get('/', [UserController::class, 'checkRole'])
     ->middleware('auth');
 
@@ -101,6 +103,13 @@ Route::prefix('/func')->group(function () {
         Route::get('/generate', [UserController::class, 'generateToken']);
     });
 
+    /* -- ---------- Under Observation ----------- -- */
+    Route::prefix('/under-observation')->group(function () {
+        Route::post('/add', [ObservationController::class, 'add']);
+        Route::post('/edit', [ObservationController::class, 'edit']);
+        Route::post('/delete', [ObservationController::class, 'delete']);
+    });
+
 });
 
 /* -- ---------- Dashboards ----------- -- */
@@ -113,6 +122,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/pig-management', [AdminDashboardController::class, 'pigManagement']);
         Route::get('/view-activity/{sowId}', [AdminDashboardController::class, 'pigActivity']);
         Route::get('/suppliers', [AdminDashboardController::class, 'suppliers']);
+        Route::get('/settings', [AdminDashboardController::class, 'settings']);
 
         Route::prefix('/pig-management')->group(function () {
             Route::get('/sow', [AdminDashboardController::class, 'PGSow']);
@@ -130,6 +140,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/pigs-assigned', [StaffDashboardController::class, 'pigsAssigned']);
         Route::get('/view-activity/{sowId}', [StaffDashboardController::class, 'pigActivity']);
         Route::get('/suppliers', [StaffDashboardController::class, 'suppliers']);
+        Route::get('/settings', [AdminDashboardController::class, 'settings']);
     });
 
 });
