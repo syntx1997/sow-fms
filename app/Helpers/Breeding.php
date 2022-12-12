@@ -11,7 +11,7 @@ class Breeding {
         $farrowing = Farrowing::where('litter_no', $litterNo)->first();
         if($farrowing) {
             $farrowingData = Farrowing::find($farrowing->id);
-            return $farrowingData->update([
+            $farrowingData->update([
                 'actual_date' => Carbon::parse($date)->addDay((21 + 114)),
                 'status' => '',
                 'weight' => 00.00,
@@ -19,6 +19,8 @@ class Breeding {
                 'alive' => 0,
                 'sow' => ''
             ]);
+
+            return $farrowingData;
         } else {
             return Farrowing::create([
                 'litter_no' => $litterNo,
@@ -36,11 +38,13 @@ class Breeding {
         $weaning = Weaning::where('litter_no', $litterNo)->first();
         if($weaning) {
             $weaningData = Weaning::find($weaning->id);
-            return $weaningData->update([
+            $weaningData->update([
                 'date' => Carbon::parse($date)->addDay(28),
                 'number' => 0,
                 'weight' => 0
             ]);
+
+            return $weaningData;
         } else {
             return Weaning::create([
                 'litter_no' => $litterNo,
