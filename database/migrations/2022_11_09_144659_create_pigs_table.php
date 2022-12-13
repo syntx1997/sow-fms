@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('photo')->default('no-img.png')->nullable();
             $table->boolean('under_observation')->default(0);
+            $table->integer('duration')->nullable()->default(0);
             $table->timestamps();
         });
     }

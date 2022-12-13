@@ -17,7 +17,8 @@ class PigController extends Controller
             'dam' => 'required',
             'dateProcured' => 'required',
             'sire' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'duration' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -39,7 +40,8 @@ class PigController extends Controller
             'date_procured' => $request->dateProcured,
             'sire' => $request->sire,
             'type' => $request->type,
-            'photo' => $photo
+            'photo' => $photo,
+            'duration' => $request->duration
         ]);
 
         return response(['message' => 'New sow added successfully'], 201);

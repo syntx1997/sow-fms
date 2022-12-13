@@ -112,6 +112,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="duration" value="0">
                     <input type="hidden" name="type" value="Sow">
                     <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Add</button>

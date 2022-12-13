@@ -97,6 +97,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-3">Duration</label>
+                        <div class="col-9">
+                            <input type="number" name="duration" class="form-control">
+                        </div>
+                    </div>
                     <hr>
                     <div class="form-group row">
                         <label class="col-3">Photo</label>
