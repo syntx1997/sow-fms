@@ -251,11 +251,11 @@
                                             @endforeach
                                         </div>
                                     @endif
-                                    @if(auth()->user()->role == 'Administrator')
-                                        <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
-                                            <i class="fa fa-plus"></i> Add New Set
-                                        </button>
-                                    @endif
+
+                                    <button id="addNewSetBtn" type="button" class="btn btn-link mt-2 mb-2">
+                                        <i class="fa fa-plus"></i> Add New Set
+                                    </button>
+
                                 </div>
                             @endif
                             <div class="tab-pane fade {{ $pig->type != 'Sow' ? 'show active' : '' }}" id="feeding">
