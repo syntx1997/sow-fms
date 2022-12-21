@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive1">
-                    <table class="table style-1 viewPhotoLightGallery" id="pigTable">
+                    <table class="table style-1 viewPhotoLightGallery responsive" id="pigTable" style="width: 100%">
                         <thead>
                         <tr>
                             <th></th>
@@ -227,9 +227,11 @@
     <script>const type = 'Boar';</script>
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('vendor/lightgallery/js/lightgallery-all.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 @endpush
 
 <!-- ----- CSS ----- -->
 @push('css')
     <link href="{{ asset('vendor/lightgallery/css/lightgallery.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet">
 @endpush
