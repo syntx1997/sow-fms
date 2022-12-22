@@ -13,13 +13,15 @@ $(function (){
         'ajax': '/func/user/get/staff/all',
         'columns': [
             {
-                'className':        'details-control',
                 'orderable':        false,
                 'data':             '',
                 'defaultContent':   '',
             },
             {
-                'data': 'number'
+                'className':        'details-control',
+                'orderable':        false,
+                'data':             '',
+                'defaultContent':   '',
             },
             {
                 'data': 'staff'

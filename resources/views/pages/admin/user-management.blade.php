@@ -11,11 +11,11 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive1">
-                    <table class="table style-1" id="staffTable">
+                    <table class="table style-1 responsive" id="staffTable" style="width: 100%">
                         <thead>
                         <tr>
                             <th></th>
-                            <th>#</th>
+                            <th></th>
                             <th>STAFF</th>
                             <th>PHONE #</th>
                             <th>DATE ADDED</th>
@@ -117,6 +117,13 @@
         </div>
     </div>
 @endsection
+
+@push('css')
+
+@endpush
+
 @push('js')
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet">
 @endpush
