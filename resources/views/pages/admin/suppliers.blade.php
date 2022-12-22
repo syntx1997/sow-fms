@@ -184,5 +184,11 @@
             }, 1000)
         }
     </script>
+    {{-- <script src="{{ asset('js/custom.min.js') }}"></script> --}}
+    <script>
+         $('.chat-hamburger').on('click',function(){
+            $('.chat-left-sidebar').toggleClass('show');
+        });
+    </script>
     <script src="{{ asset('js/pages/dashboard/admin/suppliers.js') }}"></script>
 @endpush
